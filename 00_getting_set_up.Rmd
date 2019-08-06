@@ -1,0 +1,22 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+# Getting Set Up
+
+We need the latest versions of these R packages installed from GitHub. 
+
+It's best to run each line in turn in case there are issues or the user needs to provide input. 
+
+```{r setup, eval = FALSE}
+## make sure we have the packages we need
+
+if (!requireNamespace("remotes", quietly = TRUE)) {
+  install.packages("remotes")
+}
+req1 <- c("maps", "maptools", "sp")
+remotes::install_cran(req1)
+```
+
+

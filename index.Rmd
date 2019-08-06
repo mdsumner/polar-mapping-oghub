@@ -1,0 +1,11 @@
+---
+title: "Challenges working with data in polar regions"
+author: Michael Sumner
+description: Challenges working with data in polar regions. 
+documentclass: book
+site: bookdown::bookdown_site
+---
+
+# About this
+
+This workshop is for R users interested in mapping in polar regions. 

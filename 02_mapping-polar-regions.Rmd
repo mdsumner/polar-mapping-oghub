@@ -150,10 +150,12 @@ maps::map(mpmerc,  fill = TRUE, col = "grey", add = TRUE)
 In essence it should be easy, but details really matter. 
 
 ```{r stars-reprojection}
-sst <- stars::read_stars(system.file("nc/reduced.nc", package = "stars", mustWork = TRUE))
+sst <- raster::raster(system.file("nc/reduced.nc", package = "stars", mustWork = TRUE))
+library(raster)
+plot(raster::projectRaster(sst, crs = "+proj=laea +lat_0=-90"))
 
-x <- st_crop(sst, st_bbox(c(xmin = 0, xmax = 360, ymin = -90, ymax = 0), crs = 4326))
-st_warp(x[,,,1,1, drop = T], crs = st_crs("+proj=laea +lat_0=-90"), use_gdal = TRUE)
+plot(raster::projectRaster(rotate(sst), crs = "+proj=laea +lat_0=-90"))
+
 ```
 
 

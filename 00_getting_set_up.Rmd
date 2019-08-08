@@ -15,7 +15,7 @@ It's best to run each line in turn in case there are issues or the user needs to
 if (!requireNamespace("remotes", quietly = TRUE)) {
   install.packages("remotes")
 }
-req1 <- c("maps", "maptools", "sp")
+req1 <- c("ggplot2", "maps", "maptools", "raster", "sp")
 remotes::install_cran(req1)
 ```
 

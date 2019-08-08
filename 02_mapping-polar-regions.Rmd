@@ -194,7 +194,7 @@ library(ggplot2)
 
 A basic circumpolar map in polar stereographic projection:
 
-```{r somap1
+```{r somap1}
 SOmap()
 ```
 
@@ -302,7 +302,8 @@ SOleg(position = "topright", col = my_cmap, breaks = label_breaks,
 Multiple rasters:
 
 ```{r somap_raster5}
-xr2 <- shift(xr, x = -70) ## offset in longitude
+
+xr2 <- raster::shift(xr,  -70) ## offset in longitude
 SOmap()
 SOplot(xr, legend = FALSE, col = my_cmap)
 SOplot(xr2, legend = FALSE, col = my_cmap)
@@ -543,7 +544,7 @@ remotes::install_github("SCAR-sandpit/quantarcticR")
 
 Example usage:
 
-```{r qR1}
+```{r qR1, eval=FALSE}
 library(quantarcticR)
 ds <- qa_datasets() ## all available layers
 head(ds)

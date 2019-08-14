@@ -44,8 +44,8 @@ actual object.
 
 
 If we look carefully at the southern edge and the eastern edge, notice that the
-coastline for Antarctica does not extend to the south pole, and that Chukotka
-region of Russia east of 180 longitude are not in the western part of the map.
+coastline for Antarctica does not extend to the south pole, and the Chukotka
+region of Russia east of 180 longitude is not in the western part of the map.
 
 
 ```{r maps-assign}

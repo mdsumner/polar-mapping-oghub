@@ -1,0 +1,221 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r preamble2, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+What is required for mapping in polar regions? 
+
+* shape-feature orientations, the dateline and the poles
+* handling of data in long-lat, understanding of metrics and shape (area, length, angle)
+* projected maps can be very hard to do, each has its own issues
+* quantities like vector fields
+* conventions for global data -180/180, 0/360
+
+
+
+
+
+# Mapping in R
+
+```{r setup-02}
+library(sp)
+library(raster)
+library(maps)
+library(rgdal)
+data("wrld_simpl", package = "maptools")
+```
+
+
+The oldest general mapping tool in R is the `maps` package. It has a simple whole-world coastline data set for immediate use. 
+
+```{r maps-package}
+maps::map()
+```
+
+The data underlying this live map is available by capturing the output as an
+actual object. 
+
+
+If we look carefully at the southern edge and the eastern edge, notice that the
+coastline for Antarctica does not extend to the south pole, and that Chukotka
+region of Russia east of 180 longitude are not in the western part of the map.
+
+
+```{r maps-assign}
+maps_c <- maps::map(plot = FALSE)
+
+lonlat <- cbind(maps_c$x, maps_c$y)
+
+plot(lonlat, pch = "+", cex = 0.4, axes = FALSE)
+lines(lonlat, col = "dodgerblue")
+
+abline(h = c(-90, 90), v = c(-180, 180))
+
+```
+
+A very similar and slightly more modern data set is available in the `maptools` package.
+
+
+(It's not sensible use `maps` or `maptools` for coasline or country boundary data, but they
+are handy for exploring concepts ). 
+
+```{r wrld-simpl}
+data("wrld_simpl", package = "maptools")
+
+plot(wrld_simpl)
+```
+
+This data set aligns exactly to the  conventional -180/180 -90/90 extent of the longitude/latitude projection.
+
+```{r lon180-lat90}
+plot(0, type = "n", axes = FALSE, xlab = "", ylab = "", xlim = c(-180, 180), ylim = c(-90, 90))
+rect(xleft = -180, ybottom = -90, xright = 180, ytop = 90, border = "darkred", lwd = 4, lty = 2)
+plot(wrld_simpl, add = TRUE)
+```
+
+## Exercises 01
+
+1. How can we find the longitude and latitude ranges of the maps data `maps_c` and the maptools data `wrld_simpl`? 
+2. Can we draw polygons with a fill colour with the maps package? 
+
+
+Answer 1: `range(m$x, na.rm = TRUE)` `range(m$y, na.rm = TRUE`) also `m$range`
+
+Answer 2: `polygon(lonlat, col = "grey")` does not work, and `map(mp, fill = TRUE, col = "grey")` does not work, but `maps::map(fill = TRUE, col = "grey")` does seem to work.
+
+
+What's going on? Look at the very south-eastern corner of the map. The "coastline" has been extended to the very south boundary of the available area. 
+
+```{r south-east}
+plot(0, type = "n", axes = FALSE, xlab = "", ylab = "", xlim = c(-150, 180), ylim = c(-90, -60))
+plot(wrld_simpl, add = TRUE, col = "grey")
+rect(xleft = -180, ybottom = -90, xright = 180, ytop = 90, border = "darkred", lwd = 4, lty = 2)
+
+maps::map(add = TRUE, col = "dodgerblue", lwd = 3)
+```
+
+When we add the old maps coastline see that it does not extend to 90S and it does not traverse the southern boundary.
+
+One reason for this is that if we choose a projection where the east and west edges of the Antarctic coastline meet then we get what looks a fairly clean join.
+
+```{r laea}
+## scale factor
+f <- 3e6
+plot(rgdal::project(lonlat, "+proj=laea +lat_0=-90 +datum=WGS84"), asp = 1, type = "l",
+     xlim = c(-1, 1) * f, ylim = c(-1, 1) * f, xlab = "", ylab = "")
+
+```
+
+If we try the same with `wrld_simpl` it's not as neat.  We have a strange "seam" that points exactly to the south pole (our projection is centred on longitude = 0, and latitude = -90. 
+
+
+
+```{r wrld}
+plot(sp::spTransform(wrld_simpl, "+proj=laea +lat_0=-90 +datum=WGS84"), asp = 1,
+     xlim = c(-1, 1) * f, ylim = c(-1, 1) * f, xlab = "", ylab = "", lwd = 3)
+abline(v = 0, h = 0, lty = 2, col = "grey")
+```
+
+
+## Let's use the maps data!
+
+In `maps_c` we have the maps data structure, and this looks promising.
+
+```{r maps-data}
+str(maps_c)
+
+mp <- maps_c
+pxy <- rgdal::project(lonlat, "+proj=laea +lat_0=-90 +datum=WGS84")
+mp$x <- pxy[,1]
+mp$y <- pxy[,2]
+mp$range <- c(range(mp$x,na.rm = TRUE), range(mp$y, na.rm = TRUE))
+mp$range
+plot(c(-1, 1) * f, c(-1, 1) * f, type = "n", asp = 1)
+maps::map(mp, add = TRUE)
+
+
+## but it doesn't take much to go awry
+plot(c(-1, 1) * f, c(-1, 1) * f, type = "n", asp = 1)
+maps::map(mp, add = TRUE, fill = TRUE, col = "grey")
+
+```
+
+The problem is that the maps database has enough internal structure to join lines correctly, with `NA` gaps between different connected linestrings, but not enough to draw these things as polygons. A similar problem occurs in the default projection. While `wrld_simpl` has been extend by placing two dummy coordinates at the east and west versions of the south pole, this data set does not have those.
+
+We have to look quite carefully to understand what is happening, but this is wrapping around overlapping itself and so close to the southern bound we barely notice.
+
+
+```{r no-pole}
+plot(0, type = "n", axes = FALSE, xlab = "", ylab = "", xlim = c(-180, -110), ylim = c(-90, -60))
+
+rect(xleft = -180, ybottom = -90, xright = 180, ytop = 90, border = "darkred", lwd = 4, lty = 2)
+
+maps::map(add = TRUE,col = "grey", fill = TRUE)
+
+maps::map(col = "grey", fill = TRUE)
+
+
+mpmerc <- maps_c
+pxy <- rgdal::project(lonlat, "+proj=merc +datum=WGS84")
+mpmerc$x <- pxy[,1]
+mpmerc$y <- pxy[,2]
+mpmerc$range <- c(range(mpmerc$x,na.rm = TRUE), range(mpmerc$y, na.rm = TRUE))
+mpmerc$range
+
+## the catastrophe made a little clearer 
+plot(0, xlim = range(mpmerc$range[1:2]), ylim = c(mpmerc$range[1], 0))
+maps::map(mpmerc,  fill = TRUE, col = "grey", add = TRUE)
+
+
+```
+
+
+
+## Reprojecting to polar regions
+
+In essence it should be easy, but details really matter. 
+
+```{r raster-reprojection}
+sst <- raster::raster(system.file("nc/reduced.nc", package = "stars", mustWork = TRUE))
+
+plot(raster::projectRaster(sst, crs = "+proj=laea +lat_0=-90"))
+plot(raster::projectRaster(rotate(sst), crs = "+proj=laea +lat_0=-90"))
+```
+
+Loxodromes need densifying, and not along great circles. 
+
+The pole is undefined in Mercator.
+
+Sensible polar projections are stereographic and Lambert Azimuthal Equal Area. These are more or less identical over a large area, so knowing what is in use really matters!
+
+
+```{r polar-laea}
+data("wrld_simpl", package = "maptools")
+laea <- "+proj=laea +lon_0=0 +lat_0=-90 +datum=WGS84"
+stere <- "+proj=stere +lon_0=0 +lat_0=-90 +datum=WGS84"
+
+wm <- wrld_simpl[coordinates(wrld_simpl)[,2] < 30, ]
+ 
+## remember that plotting in R is usually *NOT* coordinate system aware ...
+
+plot(spTransform(wm, laea))
+plot(spTransform(wm, stere), add = TRUE, border = "firebrick")
+points(0, 0, cex = 40)
+```
+
+
+This video explains the Lambert Azimuthal Equal Area projection: https://www.youtube.com/watch?v=quzIU4nL9ig  (crux at 2:25 with the spherical shells). 
+
+## Demonstration of the projection concept
+
+rgl plots Stereographic, LAEA, Orthographic
+
+
+
+
+

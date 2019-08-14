@@ -6,20 +6,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="2 Getting Set Up | Challenges working with data in polar regions" />
+<meta property="og:title" content="5 SOmap | Challenges working with data in polar regions" />
 <meta property="og:type" content="book" />
 
 
-<meta property="og:description" content="2 Getting Set Up | Challenges working with data in polar regions." />
+<meta property="og:description" content="5 SOmap | Challenges working with data in polar regions." />
 
 
 <meta name="author" content="Michael Sumner" />
 
 
 
-<meta name="description" content="2 Getting Set Up | Challenges working with data in polar regions.">
+<meta name="description" content="5 SOmap | Challenges working with data in polar regions.">
 
-<title>2 Getting Set Up | Challenges working with data in polar regions</title>
+<title>5 SOmap | Challenges working with data in polar regions</title>
 
 <script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -152,34 +152,47 @@ img {
 </div>
 <div class="row">
 <div class="col-sm-12">
-<div id="getting-set-up" class="section level1">
-<h1><span class="header-section-number">2</span> Getting Set Up</h1>
-<p>We need the following packages installed, using <code>remotes</code> is the best way to install as it will not re-install any package if it’s already up to date.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">## make sure we have the packages we need</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">req1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;maps&quot;</span>, <span class="st">&quot;maptools&quot;</span>, <span class="st">&quot;raster&quot;</span>, <span class="st">&quot;sp&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;rgdal&quot;</span>)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">remotes<span class="op">::</span><span class="kw">install_cran</span>(req1)</a></code></pre></div>
-<p>Obtain some extra data sets that will be used in this session.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(<span class="st">&quot;polar-mapping.Rdata&quot;</span>)) {</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"> <span class="kw">download.file</span>(<span class="st">&quot;https://github.com/mdsumner/polar-mapping-oghub/raw/master/data-raw/polar-mapping.Rdata&quot;</span>, </a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">               <span class="st">&quot;polar-mapping.Rdata&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">load</span>(<span class="st">&quot;polar-mapping.Rdata&quot;</span>)</a></code></pre></div>
+<div id="somap" class="section level1">
+<h1><span class="header-section-number">5</span> SOmap</h1>
+<p>The <code>SOmap</code> package is intended to solve some of these problems, and provide an easier way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the <code>SOmap_auto</code> function extends this to other projections). <code>SOmap</code> won’t necessarily get you exactly the map you want. But if it doesn’t, it should hopefully get you close enough that you can make modifications to suit your exact purposes.</p>
+<p>Please bear in mind that <code>SOmap</code> is still in development, and so its functionality (function parameters and/or behaviour) may change.</p>
+<p>By default, <code>SOmap</code> works with base graphics (and associated functionality from packages such as <code>raster</code> and <code>sp</code>). It is also possible to work with <code>ggplot2</code>-based graphics, as described below.</p>
+<p>Start by loading the <code>SOmap</code> package:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">library</span>(SOmap)</a>
+<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="co">## also define a colour map to use for some examples</span></a>
+<a class="sourceLine" id="cb49-3" data-line-number="3">my_cmap &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;#4D4140&quot;</span>, <span class="st">&quot;#596F7E&quot;</span>, <span class="st">&quot;#168B98&quot;</span>,</a>
+<a class="sourceLine" id="cb49-4" data-line-number="4">                              <span class="st">&quot;#ED5B67&quot;</span>, <span class="st">&quot;#E27766&quot;</span>, <span class="st">&quot;#DAAD50&quot;</span>, <span class="st">&quot;#EAC3A6&quot;</span>))(<span class="dv">51</span>)</a></code></pre></div>
+<p>DRAFT, this might be illustrated or not</p>
+<div id="circumpolar-maps" class="section level2">
+<h2><span class="header-section-number">5.1</span> Circumpolar maps</h2>
+<p>A basic circumpolar map in polar stereographic projection:</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1"><span class="kw">SOmap</span>()</a></code></pre></div>
+<p><code>SOmanagement()</code> provides a number of contextual layers such as MPA boundaries and management zones.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw">SOmap</span>(<span class="dt">trim =</span> <span class="dv">-40</span>) <span class="co">## plot to 40S</span></a>
+<a class="sourceLine" id="cb51-2" data-line-number="2"><span class="co">## add the exclusive economic zones management layer</span></a>
+<a class="sourceLine" id="cb51-3" data-line-number="3"><span class="kw">SOmanagement</span>(<span class="dt">eez =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+</div>
+<div id="adding-points" class="section level2">
+<h2><span class="header-section-number">5.2</span> Adding points</h2>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1"><span class="co">## some longitude/latitude data</span></a>
+<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="kw">library</span>(sp)</a>
+<a class="sourceLine" id="cb52-3" data-line-number="3">my_points_ll &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lon =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">350</span>, <span class="dt">by =</span> <span class="dv">10</span>), <span class="dt">lat =</span> <span class="dv">-55</span>, <span class="dt">z =</span> <span class="kw">runif</span>(<span class="dv">36</span>))</a>
+<a class="sourceLine" id="cb52-4" data-line-number="4"><span class="kw">coordinates</span>(my_points_ll) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)</a>
+<a class="sourceLine" id="cb52-5" data-line-number="5"><span class="kw">projection</span>(my_points_ll) &lt;-<span class="st"> &quot;+proj=longlat +datum=WGS84&quot;</span></a></code></pre></div>
+<p>This needs to be reprojected to match our map before plotting. The <code>SOproj</code> function does this:</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="co">## reproject to our SOmap projection</span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2">my_points &lt;-<span class="st"> </span><span class="kw">SOproj</span>(my_points_ll)</a>
+<a class="sourceLine" id="cb53-3" data-line-number="3"><span class="co">## and plot</span></a>
+<a class="sourceLine" id="cb53-4" data-line-number="4"><span class="kw">SOmap</span>()</a>
+<a class="sourceLine" id="cb53-5" data-line-number="5"><span class="kw">plot</span>(my_points, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p>Or use <code>SOplot</code> to reproject and plot in one step:</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">SOmap</span>()</a>
+<a class="sourceLine" id="cb54-2" data-line-number="2"><span class="kw">SOplot</span>(my_points_ll, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
 
-<p>What is required for mapping in polar regions?</p>
-<ul>
-<li>shape-feature orientations, the dateline and the poles</li>
-<li>handling of data in long-lat, understanding of metrics and shape (area, length, angle)</li>
-<li>projected maps can be very hard to do, each has its own issues</li>
-<li>quantities like vector fields</li>
-<li>conventions for global data -180/180, 0/360</li>
-</ul>
+</div>
 </div>
 <p style="text-align: center;">
-<a href="index.html"><button class="btn btn-default">Previous</button></a>
-<a href="mapping-in-r.html"><button class="btn btn-default">Next</button></a>
+<a href="data-handling-in-polar-regions.html"><button class="btn btn-default">Previous</button></a>
 </p>
 </div>
 </div>

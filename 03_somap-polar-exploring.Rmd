@@ -1,0 +1,76 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+
+# SOmap
+
+The `SOmap` package is intended to solve some of these problems, and provide an easier way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the `SOmap_auto` function extends this to other projections). `SOmap` won't necessarily get you exactly the map you want. But if it doesn't, it should hopefully get you close enough that you can make modifications to suit your exact purposes.
+
+Please bear in mind that `SOmap` is still in development, and so its functionality (function parameters and/or behaviour) may change.
+
+By default, `SOmap` works with base graphics (and associated functionality from packages such as `raster` and `sp`). It is also possible to work with `ggplot2`-based graphics, as described below.
+
+Start by loading the `SOmap` package:
+
+```{r somap_init, cache = FALSE, eval=FALSE}
+library(SOmap)
+## also define a colour map to use for some examples
+my_cmap <- colorRampPalette(c("#4D4140", "#596F7E", "#168B98",
+                              "#ED5B67", "#E27766", "#DAAD50", "#EAC3A6"))(51)
+```
+
+```{r somap_pkgs, echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, eval=FALSE}
+## ensure these are loaded, library calls below are cached and might not get evaluated every run
+library(sp)
+library(raster)
+library(ggplot2)
+```
+
+DRAFT, this might be illustrated or not
+
+
+## Circumpolar maps
+
+A basic circumpolar map in polar stereographic projection:
+
+```{r somap1, eval=FALSE}
+SOmap()
+```
+
+`SOmanagement()` provides a number of contextual layers such as MPA boundaries and management zones.
+
+```{r somap2, eval=FALSE}
+SOmap(trim = -40) ## plot to 40S
+## add the exclusive economic zones management layer
+SOmanagement(eez = TRUE)
+```
+
+## Adding points
+
+```{r somap_pts1, eval=FALSE}
+## some longitude/latitude data
+library(sp)
+my_points_ll <- data.frame(lon = seq(0, 350, by = 10), lat = -55, z = runif(36))
+coordinates(my_points_ll) <- c("lon", "lat")
+projection(my_points_ll) <- "+proj=longlat +datum=WGS84"
+```
+
+This needs to be reprojected to match our map before plotting. The `SOproj` function does this:
+
+```{r somap_pts2, eval=FALSE}
+## reproject to our SOmap projection
+my_points <- SOproj(my_points_ll)
+## and plot
+SOmap()
+plot(my_points, col = "blue", add = TRUE)
+```
+
+Or use `SOplot` to reproject and plot in one step:
+
+```{r somap_pts3, eval=FALSE}
+SOmap()
+SOplot(my_points_ll, col = "blue")
+```

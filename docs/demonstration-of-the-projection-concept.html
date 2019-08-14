@@ -6,20 +6,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="3 Overview | Challenges working with data in polar regions" />
+<meta property="og:title" content="7 Demonstration of the projection concept | Challenges working with data in polar regions" />
 <meta property="og:type" content="book" />
 
 
-<meta property="og:description" content="3 Overview | Challenges working with data in polar regions." />
+<meta property="og:description" content="7 Demonstration of the projection concept | Challenges working with data in polar regions." />
 
 
 <meta name="author" content="Michael Sumner" />
 
 
 
-<meta name="description" content="3 Overview | Challenges working with data in polar regions.">
+<meta name="description" content="7 Demonstration of the projection concept | Challenges working with data in polar regions.">
 
-<title>3 Overview | Challenges working with data in polar regions</title>
+<title>7 Demonstration of the projection concept | Challenges working with data in polar regions</title>
 
 <script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -129,42 +129,34 @@ img {
 <div id="TOC">
 <ul>
 <li><a href="index.html#about-this"><span class="toc-section-number">1</span> About this</a></li>
-<li><a href="getting-set-up.html#getting-set-up"><span class="toc-section-number">2</span> Getting Set Up</a></li>
-<li><a href="overview.html#overview"><span class="toc-section-number">3</span> Overview</a></li>
-<li class="has-sub"><a href="mapping.html#mapping"><span class="toc-section-number">4</span> Mapping</a><ul>
-<li class="has-sub"><a href="mapping.html#maps-in-r"><span class="toc-section-number">4.1</span> Maps in R</a><ul>
-<li><a href="mapping.html#exercises"><span class="toc-section-number">4.1.1</span> Exercises</a></li>
-<li><a href="mapping.html#lets-use-the-maps-data"><span class="toc-section-number">4.1.2</span> Let’s use the maps data!</a></li>
+<li><a href="description-and-objectives.html#description-and-objectives"><span class="toc-section-number">2</span> Description and objectives</a></li>
+<li><a href="getting-set-up.html#getting-set-up"><span class="toc-section-number">3</span> Getting Set Up</a></li>
+<li class="has-sub"><a href="mapping-in-r.html#mapping-in-r"><span class="toc-section-number">4</span> Mapping in R</a><ul>
+<li><a href="mapping-in-r.html#exercises"><span class="toc-section-number">4.1</span> Exercises</a></li>
 </ul></li>
-<li><a href="mapping.html#reprojecting-to-polar-regions"><span class="toc-section-number">4.2</span> Reprojecting to polar regions</a></li>
-<li><a href="mapping.html#demonstration-of-the-projections-conceptually"><span class="toc-section-number">4.3</span> Demonstration of the projections conceptually</a></li>
-<li><a href="mapping.html#overlay-between-different-projections"><span class="toc-section-number">4.4</span> Overlay between different projections</a></li>
-<li><a href="mapping.html#build-an-index-betweeen-the-raw-raster-data-and-the-polar-map-regions"><span class="toc-section-number">4.5</span> Build an index betweeen the raw raster data and the polar map regions</a></li>
-<li class="has-sub"><a href="mapping.html#somap"><span class="toc-section-number">4.6</span> SOmap</a><ul>
-<li><a href="mapping.html#circumpolar-maps"><span class="toc-section-number">4.6.1</span> Circumpolar maps</a></li>
-</ul></li>
-</ul></li>
+<li><a href="lets-use-the-maps-data.html#lets-use-the-maps-data"><span class="toc-section-number">5</span> Let’s use the maps data!</a></li>
+<li><a href="reprojecting-to-polar-regions.html#reprojecting-to-polar-regions"><span class="toc-section-number">6</span> Reprojecting to polar regions</a></li>
+<li><a href="demonstration-of-the-projection-concept.html#demonstration-of-the-projection-concept"><span class="toc-section-number">7</span> Demonstration of the projection concept</a></li>
+<li><a href="data-handling-in-polar-regions.html#data-handling-in-polar-regions"><span class="toc-section-number">8</span> Data handling in polar regions</a></li>
+<li><a href="overlay-between-different-projections.html#overlay-between-different-projections"><span class="toc-section-number">9</span> Overlay between different projections</a></li>
+<li><a href="build-an-index-betweeen-the-raw-raster-data-and-the-polar-map-regions.html#build-an-index-betweeen-the-raw-raster-data-and-the-polar-map-regions"><span class="toc-section-number">10</span> Build an index betweeen the raw raster data and the polar map regions</a></li>
+<li><a href="somap.html#somap"><span class="toc-section-number">11</span> SOmap</a></li>
+<li><a href="circumpolar-maps.html#circumpolar-maps"><span class="toc-section-number">12</span> Circumpolar maps</a></li>
+<li><a href="adding-points.html#adding-points"><span class="toc-section-number">13</span> Adding points</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12">
-<div id="overview" class="section level1">
-<h1><span class="header-section-number">3</span> Overview</h1>
-<p>What is required for mapping in polar regions?</p>
-<ul>
-<li>shape-feature orientations, the dateline and the poles</li>
-<li>handling of data in long-lat, understanding of metrics and shape (area, length, angle)</li>
-<li>projected maps can be very hard to do, each has its own issues</li>
-<li>quantities like vector fields</li>
-<li>conventions for global data -180/180, 0/360</li>
-</ul>
+<div id="demonstration-of-the-projection-concept" class="section level1">
+<h1><span class="header-section-number">7</span> Demonstration of the projection concept</h1>
+<p>rgl plots Stereographic, LAEA, Orthographic</p>
 
 </div>
 <p style="text-align: center;">
-<a href="getting-set-up.html"><button class="btn btn-default">Previous</button></a>
-<a href="mapping.html"><button class="btn btn-default">Next</button></a>
+<a href="reprojecting-to-polar-regions.html"><button class="btn btn-default">Previous</button></a>
+<a href="data-handling-in-polar-regions.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>
 </div>

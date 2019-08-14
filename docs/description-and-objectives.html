@@ -6,20 +6,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Challenges working with data in polar regions" />
+<meta property="og:title" content="2 Description and objectives | Challenges working with data in polar regions" />
 <meta property="og:type" content="book" />
 
 
-<meta property="og:description" content="Challenges working with data in polar regions." />
+<meta property="og:description" content="2 Description and objectives | Challenges working with data in polar regions." />
 
 
 <meta name="author" content="Michael Sumner" />
 
 
 
-<meta name="description" content="Challenges working with data in polar regions.">
+<meta name="description" content="2 Description and objectives | Challenges working with data in polar regions.">
 
-<title>Challenges working with data in polar regions</title>
+<title>2 Description and objectives | Challenges working with data in polar regions</title>
 
 <script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -128,39 +128,29 @@ img {
 <div class="col-sm-12">
 <div id="TOC">
 <ul>
-<li class="has-sub"><a href="index.html#about-this"><span class="toc-section-number">1</span> About this</a><ul>
-<li><a href="index.html#description-and-objectives"><span class="toc-section-number">1.1</span> Description and objectives</a></li>
+<li><a href="index.html#about-this"><span class="toc-section-number">1</span> About this</a></li>
+<li><a href="description-and-objectives.html#description-and-objectives"><span class="toc-section-number">2</span> Description and objectives</a></li>
+<li><a href="getting-set-up.html#getting-set-up"><span class="toc-section-number">3</span> Getting Set Up</a></li>
+<li class="has-sub"><a href="mapping-in-r.html#mapping-in-r"><span class="toc-section-number">4</span> Mapping in R</a><ul>
+<li><a href="mapping-in-r.html#exercises"><span class="toc-section-number">4.1</span> Exercises</a></li>
 </ul></li>
-<li><a href="getting-set-up.html#getting-set-up"><span class="toc-section-number">2</span> Getting Set Up</a></li>
-<li class="has-sub"><a href="mapping-in-r.html#mapping-in-r"><span class="toc-section-number">3</span> Mapping in R</a><ul>
-<li><a href="mapping-in-r.html#exercises-01"><span class="toc-section-number">3.1</span> Exercises 01</a></li>
-<li><a href="mapping-in-r.html#lets-use-the-maps-data"><span class="toc-section-number">3.2</span> Let’s use the maps data!</a></li>
-<li><a href="mapping-in-r.html#reprojecting-to-polar-regions"><span class="toc-section-number">3.3</span> Reprojecting to polar regions</a></li>
-<li><a href="mapping-in-r.html#demonstration-of-the-projection-concept"><span class="toc-section-number">3.4</span> Demonstration of the projection concept</a></li>
-</ul></li>
-<li class="has-sub"><a href="data-handling-in-polar-regions.html#data-handling-in-polar-regions"><span class="toc-section-number">4</span> Data handling in polar regions</a><ul>
-<li><a href="data-handling-in-polar-regions.html#overlay-between-different-projections"><span class="toc-section-number">4.1</span> Overlay between different projections</a></li>
-<li><a href="data-handling-in-polar-regions.html#build-an-index-betweeen-the-raw-raster-data-and-the-polar-map-regions"><span class="toc-section-number">4.2</span> Build an index betweeen the raw raster data and the polar map regions</a></li>
-</ul></li>
-<li class="has-sub"><a href="somap.html#somap"><span class="toc-section-number">5</span> SOmap</a><ul>
-<li><a href="somap.html#circumpolar-maps"><span class="toc-section-number">5.1</span> Circumpolar maps</a></li>
-<li><a href="somap.html#adding-points"><span class="toc-section-number">5.2</span> Adding points</a></li>
-</ul></li>
+<li><a href="lets-use-the-maps-data.html#lets-use-the-maps-data"><span class="toc-section-number">5</span> Let’s use the maps data!</a></li>
+<li><a href="reprojecting-to-polar-regions.html#reprojecting-to-polar-regions"><span class="toc-section-number">6</span> Reprojecting to polar regions</a></li>
+<li><a href="demonstration-of-the-projection-concept.html#demonstration-of-the-projection-concept"><span class="toc-section-number">7</span> Demonstration of the projection concept</a></li>
+<li><a href="data-handling-in-polar-regions.html#data-handling-in-polar-regions"><span class="toc-section-number">8</span> Data handling in polar regions</a></li>
+<li><a href="overlay-between-different-projections.html#overlay-between-different-projections"><span class="toc-section-number">9</span> Overlay between different projections</a></li>
+<li><a href="build-an-index-betweeen-the-raw-raster-data-and-the-polar-map-regions.html#build-an-index-betweeen-the-raw-raster-data-and-the-polar-map-regions"><span class="toc-section-number">10</span> Build an index betweeen the raw raster data and the polar map regions</a></li>
+<li><a href="somap.html#somap"><span class="toc-section-number">11</span> SOmap</a></li>
+<li><a href="circumpolar-maps.html#circumpolar-maps"><span class="toc-section-number">12</span> Circumpolar maps</a></li>
+<li><a href="adding-points.html#adding-points"><span class="toc-section-number">13</span> Adding points</a></li>
 </ul>
 </div>
 </div>
 </div>
 <div class="row">
 <div class="col-sm-12">
-<div id="header">
-<h1 class="title">Challenges working with data in polar regions</h1>
-<h4 class="author"><em>Michael Sumner</em></h4>
-</div>
-<div id="about-this" class="section level1">
-<h1><span class="header-section-number">1</span> About this</h1>
-<p>This workshop is for R users interested in mapping in polar regions.</p>
-<div id="description-and-objectives" class="section level2">
-<h2><span class="header-section-number">1.1</span> Description and objectives</h2>
+<div id="description-and-objectives" class="section level1">
+<h1><span class="header-section-number">2</span> Description and objectives</h1>
 <p>Polar regions present specific problems for broad-scale mapping that often make it very hard to make a simple map from standard data types. Although generic tools are available for reprojecting coordinates and vector and raster data, it’s often not straightforward in practice especially over large regions and in polar areas. Problems are caused by compromises made for global data sets, wrapping problems at the anti-meridian and poles, the availability and sometimes assumptions by software authors. Most problems occur with broad-scale, hemisphere-wide maps and while these are less commonly used for analysis, they are used to prototype and trouble-shoot workflows. Common knowledge about projections and choosing them for particular purposes is not widely shared, even though they are very powerful for visualization and analysis at any scale.</p>
 <p>This R session will explain the fundamentals of some of these problems and the issues involved with projections, visualizations, analyses and measurements and provide techniques for using map projections in polar regions. We will also introduce some some emerging tools that should make life easier and ease the process of working with map projections.</p>
 <p>Installation instructions: <a href="https://mdsumner.github.io/polar-mapping-oghub/getting-set-up.html#getting-set-up" class="uri">https://mdsumner.github.io/polar-mapping-oghub/getting-set-up.html#getting-set-up</a></p>
@@ -171,8 +161,8 @@ img {
 <p>M.J. Brasier, A. Constable, J. Melbourne-Thomas, R. Trebilco, H. Griffiths, A. Van de Putte, M. Sumner (2019) Observations and models to support the first Marine Ecosystem Assessment for the Southern Ocean (MEASO), Journal of Marine Systems, 197, <a href="https://doi.org/10.1016/j.jmarsys.2019.05.008" class="uri">https://doi.org/10.1016/j.jmarsys.2019.05.008</a></p>
 
 </div>
-</div>
 <p style="text-align: center;">
+<a href="index.html"><button class="btn btn-default">Previous</button></a>
 <a href="getting-set-up.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>

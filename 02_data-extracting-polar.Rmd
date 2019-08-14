@@ -1,0 +1,117 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r preamble3, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Data handling in polar regions
+
+```{r setup-03}
+load("polar-mapping.Rdata")  ## see getting-set-up
+library(dplyr)
+```
+In practice, these kinds of problems in polar data mean that careful choices be made. For an involved whole-ecosystem assessment publication we generated a partition of the marine region of the Southern Ocean. 
+
+```{r ace-ecostats}
+
+plot(aes_zone, col = aes_zone$colour)
+abline(v = 0, lty = 2)
+```
+
+This was easy for mapping sea ice concentration, we have daily remote sensing maps of southern ocean sea ice and it's trivial to reproject our polygons onto those. 
+
+```{r example-ice}
+library(raster)
+plot(sea_ice)
+plot(spTransform(aes_zone, raster::projection(sea_ice)), add = TRUE)
+```
+
+But when it comes to sea surface temperature, these data have a number of issues. 
+
+One is that the data is natively in [0, 360] longitude range and if we project these data to our polar map we lose the western hemisphere.
+
+```{r example-sst}
+rtemp <- raster(aes_zone, res = 25000)
+plot(projectRaster(sea_temp, rtemp))
+```
+
+The solution to *that problem* is to shift the part of the raster that is over the dateline back to the west
+
+```{r example2-sst}
+sea_temp180 <- raster::rotate(sea_temp)
+plot(projectRaster(sea_temp180, rtemp))
+plot(aes_zone, add = TRUE)
+```
+
+On the face of it this means we now have an easy job, simply project every sea surface temperature raster onto this polar map and then do the extraction. 
+
+But, this is going to be slow, it's a lot of work to reproject 10000+ raster grids, and it inevitably involves resampling (remodelling) of the underlying data, imposing assumptions about what the data means. This is more important for other quantities like wind speeds and water flow directions, but is for the same ultimate reasons. 
+
+## Overlay between different projections
+
+This is what the overlay process would be like, and we might think we can inverse-transform our polar polygons to this. 
+
+```{r native-grid}
+plot(sea_temp180)
+plot(aes_zone_ll, add =TRUE)
+
+```
+
+But, it doesn't look good. This is because the polar region that crosses the dateline is a single polygon, but in this projection it must be split in two pieces. This is why there is two objects `aes_zone` and `aes_zone_ll`. It can be a bit of work to construct these two versions but in our experience it really made things simpler, there's simply a one-to-one relationship between the to data sets, one in longitude/latitude, and one in polar map coordinates. 
+
+```{r native-grid2}
+plot(sea_temp180)
+plot(spTransform(aes_zone, raster::projection(sea_temp180)), add =TRUE)
+
+```
+
+## Build an index betweeen the raw raster data and the polar map regions
+
+This is a really powerful trick for processing spatial data in R, and boils down to performing the extraction from the raster data in the native grid. 
+
+
+Every pixel is the sea surface temperature data has a unique relationship with each polygon, it either belongs inside a single polygon or not. So we create this index by **rasterizing** the polygons into the grid. This seems backwards, but it means we now now which polygon every pixel belongs to. 
+
+
+```{r fasterize}
+aes_zone_ll$row <- 1:nrow(aes_zone_ll)
+raster_polys <- fasterize::fasterize(sf::st_as_sf(aes_zone_ll), sea_temp180, field = "row")
+plot(raster_polys)
+```
+
+
+
+That is all the "geometry lookup" work required done. We can produce an index between raster cell and polygon in a simple table. 
+
+```{r cell-index}
+cell <- tibble::tibble(polygon = raster::values(raster_polys), cell = 1:ncell(raster_polys))
+cell
+## we don't need very cell, the most southerly region is NA as is anything north of 20S
+cell <- dplyr::filter(cell, !is.na(polygon))
+cell
+```
+
+
+To extract the values for this index we use `cell` and this takes very little time: 
+
+```{r extract-cell}
+cell$sst <- raster::extract(sea_temp180, cell$cell)
+
+
+cell %>% dplyr::group_by(polygon) %>% dplyr::summarize(mean = mean(sst, na.rm = TRUE), 
+                                                       sd = sd(sst, na.rm = TRUE), 
+                                                       min = min(sst, na.rm = TRUE), 
+                                                       max = max(sst, na.rm = TRUE))
+```
+
+If we ran this using raster directly, it takes quite some time for a single layer and a single statistic, and if we have a lot of time slices it will really add up. 
+
+```{r time,eval=FALSE}
+system.time(raster::extract(sea_temp180, aes_zone_ll, fun = mean, na.rm = TRUE))
+##   user  system elapsed 
+## 18.331   0.164  18.502 
+```

@@ -6,20 +6,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="3 Mapping in R | Challenges working with data in polar regions" />
+<meta property="og:title" content="3 Polar maps | Challenges working with data in polar regions" />
 <meta property="og:type" content="book" />
 
 
-<meta property="og:description" content="3 Mapping in R | Challenges working with data in polar regions." />
+<meta property="og:description" content="3 Polar maps | Challenges working with data in polar regions." />
 
 
 <meta name="author" content="Michael Sumner" />
 
 
 
-<meta name="description" content="3 Mapping in R | Challenges working with data in polar regions.">
+<meta name="description" content="3 Polar maps | Challenges working with data in polar regions.">
 
-<title>3 Mapping in R | Challenges working with data in polar regions</title>
+<title>3 Polar maps | Challenges working with data in polar regions</title>
 
 <script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -134,11 +134,12 @@ img {
 </ul></li>
 </ul></li>
 <li><a href="getting-set-up.html#getting-set-up"><span class="toc-section-number">2</span> Getting Set Up</a></li>
-<li class="has-sub"><a href="mapping-in-r.html#mapping-in-r"><span class="toc-section-number">3</span> Mapping in R</a><ul>
-<li><a href="mapping-in-r.html#exercises-01"><span class="toc-section-number">3.1</span> Exercises 01</a></li>
-<li><a href="mapping-in-r.html#lets-use-the-maps-data"><span class="toc-section-number">3.2</span> Let’s use the maps data!</a></li>
-<li><a href="mapping-in-r.html#reprojecting-to-polar-regions"><span class="toc-section-number">3.3</span> Reprojecting to polar regions</a></li>
-<li><a href="mapping-in-r.html#demonstration-of-the-projection-concept"><span class="toc-section-number">3.4</span> Demonstration of the projection concept</a></li>
+<li class="has-sub"><a href="polar-maps.html#polar-maps"><span class="toc-section-number">3</span> Polar maps</a><ul>
+<li><a href="polar-maps.html#mapping-in-r"><span class="toc-section-number">3.1</span> Mapping in R</a></li>
+<li><a href="polar-maps.html#exercises-01"><span class="toc-section-number">3.2</span> Exercises 01</a></li>
+<li><a href="polar-maps.html#lets-use-the-maps-data"><span class="toc-section-number">3.3</span> Let’s use the maps data!</a></li>
+<li><a href="polar-maps.html#reprojecting-to-polar-regions"><span class="toc-section-number">3.4</span> Reprojecting to polar regions</a></li>
+<li><a href="polar-maps.html#demonstration-of-the-projection-concept"><span class="toc-section-number">3.5</span> Demonstration of the projection concept</a></li>
 </ul></li>
 <li class="has-sub"><a href="data-handling-in-polar-regions.html#data-handling-in-polar-regions"><span class="toc-section-number">4</span> Data handling in polar regions</a><ul>
 <li><a href="data-handling-in-polar-regions.html#overlay-between-different-projections"><span class="toc-section-number">4.1</span> Overlay between different projections</a></li>
@@ -154,8 +155,18 @@ img {
 </div>
 <div class="row">
 <div class="col-sm-12">
-<div id="mapping-in-r" class="section level1">
-<h1><span class="header-section-number">3</span> Mapping in R</h1>
+<div id="polar-maps" class="section level1">
+<h1><span class="header-section-number">3</span> Polar maps</h1>
+<p>What is required for mapping in polar regions?</p>
+<ul>
+<li>shape-feature orientations, the dateline and the poles</li>
+<li>handling of data in long-lat, understanding of metrics and shape (area, length, angle)</li>
+<li>projected maps can be very hard to do, each has its own issues</li>
+<li>quantities like vector fields</li>
+<li>conventions for global data -180/180, 0/360</li>
+</ul>
+<div id="mapping-in-r" class="section level2">
+<h2><span class="header-section-number">3.1</span> Mapping in R</h2>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">library</span>(sp)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw">library</span>(raster)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">library</span>(maps)</a>
@@ -190,8 +201,9 @@ are handy for exploring concepts ).</p>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">rect</span>(<span class="dt">xleft =</span> <span class="dv">-180</span>, <span class="dt">ybottom =</span> <span class="dv">-90</span>, <span class="dt">xright =</span> <span class="dv">180</span>, <span class="dt">ytop =</span> <span class="dv">90</span>, <span class="dt">border =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw">plot</span>(wrld_simpl, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/lon180-lat90-1.png" width="672" /></p>
+</div>
 <div id="exercises-01" class="section level2">
-<h2><span class="header-section-number">3.1</span> Exercises 01</h2>
+<h2><span class="header-section-number">3.2</span> Exercises 01</h2>
 <ol style="list-style-type: decimal">
 <li>How can we find the longitude and latitude ranges of the maps data <code>maps_c</code> and the maptools data <code>wrld_simpl</code>?</li>
 <li>Can we draw polygons with a fill colour with the maps package?</li>
@@ -219,7 +231,7 @@ are handy for exploring concepts ).</p>
 <p><img src="_main_files/figure-html/wrld-1.png" width="672" /></p>
 </div>
 <div id="lets-use-the-maps-data" class="section level2">
-<h2><span class="header-section-number">3.2</span> Let’s use the maps data!</h2>
+<h2><span class="header-section-number">3.3</span> Let’s use the maps data!</h2>
 <p>In <code>maps_c</code> we have the maps data structure, and this looks promising.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">str</span>(maps_c)</a></code></pre></div>
 <pre><code>## List of 4
@@ -265,7 +277,7 @@ are handy for exploring concepts ).</p>
 <p><img src="_main_files/figure-html/no-pole-3.png" width="672" /></p>
 </div>
 <div id="reprojecting-to-polar-regions" class="section level2">
-<h2><span class="header-section-number">3.3</span> Reprojecting to polar regions</h2>
+<h2><span class="header-section-number">3.4</span> Reprojecting to polar regions</h2>
 <p>In essence it should be easy, but details really matter.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">sst &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">raster</span>(<span class="kw">system.file</span>(<span class="st">&quot;nc/reduced.nc&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;stars&quot;</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>## Warning in .varName(nc, varname, warn = warn): varname used is: sst
@@ -300,7 +312,7 @@ are handy for exploring concepts ).</p>
 <p>This video explains the Lambert Azimuthal Equal Area projection: <a href="https://www.youtube.com/watch?v=quzIU4nL9ig" class="uri">https://www.youtube.com/watch?v=quzIU4nL9ig</a> (crux at 2:25 with the spherical shells).</p>
 </div>
 <div id="demonstration-of-the-projection-concept" class="section level2">
-<h2><span class="header-section-number">3.4</span> Demonstration of the projection concept</h2>
+<h2><span class="header-section-number">3.5</span> Demonstration of the projection concept</h2>
 <p>rgl plots Stereographic, LAEA, Orthographic</p>
 
 </div>

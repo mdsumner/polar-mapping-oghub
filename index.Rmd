@@ -10,20 +10,30 @@ site: bookdown::bookdown_site
 
 This workshop is for R users interested in mapping in polar regions. 
 
+This resource is published online at https://mdsumner.github.io/polar-mapping-oghub/.  
+
+The source code to create this resource is available on Github at https://github.com/mdsumner/polar-mapping-oghub. 
+
 ## Description and objectives 
 
 Polar regions present specific problems for broad-scale mapping that often make it very hard to make a simple map from standard data types. Although generic tools are available for reprojecting coordinates and vector and raster data, it's often not straightforward in practice especially over large regions and in polar areas. Problems are caused by compromises made for global data sets, wrapping problems at the anti-meridian and poles, the availability and sometimes assumptions by software authors. Most problems occur with broad-scale, hemisphere-wide maps and while these are less commonly used for analysis, they are used to prototype and trouble-shoot workflows. Common knowledge about projections and choosing them for particular purposes is not widely shared, even though they are very powerful for visualization and analysis at any scale. 
 
-This R session will explain the fundamentals of some of these problems and the issues involved with projections, visualizations, analyses and measurements and provide techniques for using map projections in polar regions. We will also introduce some some emerging tools that should make life easier and ease the process of working with map projections. 
+This R session will explain the fundamentals of some of these problems and the issues involved with projections, visualizations, analyses and measurements and provide techniques for using map projections in polar regions. We will also introduce some some emerging tools that aim to make life easier and ease the process of working with map projections. 
 
-Installation instructions: https://mdsumner.github.io/polar-mapping-oghub/getting-set-up.html#getting-set-up
+**Installation instructions**:  
 
-Datasets in use: 
+https://mdsumner.github.io/polar-mapping-oghub/getting-set-up.html#getting-set-up
 
-map coastline from maps package, wrld_simpl from maptools package, example sea surface temperature data (OISST 2019-08-06), example sea ice concentration data (NSIDC 2019-08-06), regional polar polygons as used in Trebilco et al. (2019)
+**Datasets in use**: 
 
-References:
+Coastline from [maps](https://CRAN.r-project.org/package=maps) package, `wrld_simpl` polygons from [maptools](https://CRAN.r-project.org/package=maptools) package, example [sea surface temperature](https://www.ncdc.noaa.gov/oisst) data (OISST 2019-08-06), example [sea ice concentration](https://nsidc.org/data/nsidc-0051) data (NSIDC 2019-08-06), `aes_zone` and `aes_zone_ll` [regional polar polygons](https://australianantarcticdivision.github.io/aceecostats/articles/static-variables-area.html) as used in Trebilco et al. (2019)
+
+
+### References
 
 Trebilco et al. (2019, in press) Assessing status and trends of open ocean habitats: a regionally resolved approach and Southern Ocean application. Ecological Indicators
 
 M.J. Brasier, A. Constable, J. Melbourne-Thomas, R. Trebilco, H. Griffiths, A. Van de Putte, M. Sumner (2019) Observations and models to support the first Marine Ecosystem Assessment for the Southern Ocean (MEASO), Journal of Marine Systems, 197, https://doi.org/10.1016/j.jmarsys.2019.05.008
+
+Dale Maschette, Michael Sumner and Ben Raymond (2019). SOmap: Southern Ocean maps. R package version 0.4.0.
+[https://australianantarcticdivision.github.io/SOmap/](https://australianantarcticdivision.github.io/SOmap/)

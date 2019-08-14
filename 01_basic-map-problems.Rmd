@@ -8,6 +8,8 @@ editor_options:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Polar maps
+
 What is required for mapping in polar regions? 
 
 * shape-feature orientations, the dateline and the poles
@@ -20,7 +22,7 @@ What is required for mapping in polar regions?
 
 
 
-# Mapping in R
+## Mapping in R
 
 ```{r setup-02}
 library(sp)

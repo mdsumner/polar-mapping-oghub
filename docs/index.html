@@ -2,42 +2,58 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-<meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="Challenges working with data in polar regions" />
-<meta property="og:type" content="book" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Challenges working with data in polar regions</title>
+  <meta name="description" content="Challenges working with data in polar regions." />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
 
+  <meta property="og:title" content="Challenges working with data in polar regions" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Challenges working with data in polar regions." />
+  
 
-<meta property="og:description" content="Challenges working with data in polar regions." />
-
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Challenges working with data in polar regions" />
+  
+  <meta name="twitter:description" content="Challenges working with data in polar regions." />
+  
 
 <meta name="author" content="Michael Sumner" />
 
 
 
-<meta name="description" content="Challenges working with data in polar regions.">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
 
-<title>Challenges working with data in polar regions</title>
+<link rel="next" href="getting-set-up.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 
-<script src="libs/jquery-1.11.3/jquery.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="libs/navigation-1.1/tabsets.js"></script>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+
+
+
+
+
+
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
@@ -94,69 +110,60 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 
-
-
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
-img {
-  max-width:100%;
-  height: auto;
-}
-</style>
+<link rel="stylesheet" href="styles.css" type="text/css" />
 </head>
 
 <body>
 
-<div class="container-fluid main-container">
 
 
-<div class="row">
-<div class="col-sm-12">
-<div id="TOC">
-<ul>
-<li class="has-sub"><a href="index.html#about-this"><span class="toc-section-number">1</span> About this</a><ul>
-<li class="has-sub"><a href="index.html#description-and-objectives"><span class="toc-section-number">1.1</span> Description and objectives</a><ul>
-<li><a href="index.html#references"><span class="toc-section-number">1.1.1</span> References</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#description-and-objectives"><i class="fa fa-check"></i><b>1.1</b> Description and objectives</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="index.html"><a href="index.html#references"><i class="fa fa-check"></i><b>1.1.1</b> References</a></li>
 </ul></li>
 </ul></li>
-<li><a href="getting-set-up.html#getting-set-up"><span class="toc-section-number">2</span> Getting Set Up</a></li>
-<li class="has-sub"><a href="polar-maps.html#polar-maps"><span class="toc-section-number">3</span> Polar maps</a><ul>
-<li><a href="polar-maps.html#mapping-in-r"><span class="toc-section-number">3.1</span> Mapping in R</a></li>
-<li><a href="polar-maps.html#lets-use-the-maps-data"><span class="toc-section-number">3.2</span> Let’s use the maps data!</a></li>
-<li><a href="polar-maps.html#reprojecting-to-polar-regions"><span class="toc-section-number">3.3</span> Reprojecting to polar regions</a></li>
-<li><a href="polar-maps.html#demonstration-of-the-projection-concept"><span class="toc-section-number">3.4</span> Demonstration of the projection concept</a></li>
+<li class="chapter" data-level="2" data-path="getting-set-up.html"><a href="getting-set-up.html"><i class="fa fa-check"></i><b>2</b> Getting Set Up</a></li>
+<li class="chapter" data-level="3" data-path="polar-maps.html"><a href="polar-maps.html"><i class="fa fa-check"></i><b>3</b> Polar maps</a><ul>
+<li class="chapter" data-level="3.1" data-path="polar-maps.html"><a href="polar-maps.html#mapping-in-r"><i class="fa fa-check"></i><b>3.1</b> Mapping in R</a></li>
+<li class="chapter" data-level="3.2" data-path="polar-maps.html"><a href="polar-maps.html#lets-use-the-maps-data"><i class="fa fa-check"></i><b>3.2</b> Let’s use the maps data!</a></li>
+<li class="chapter" data-level="3.3" data-path="polar-maps.html"><a href="polar-maps.html#reprojecting-to-polar-regions"><i class="fa fa-check"></i><b>3.3</b> Reprojecting to polar regions</a></li>
+<li class="chapter" data-level="3.4" data-path="polar-maps.html"><a href="polar-maps.html#demonstration-of-the-projection-concept"><i class="fa fa-check"></i><b>3.4</b> Demonstration of the projection concept</a></li>
 </ul></li>
-<li class="has-sub"><a href="data-handling-in-polar-regions.html#data-handling-in-polar-regions"><span class="toc-section-number">4</span> Data handling in polar regions</a><ul>
-<li><a href="data-handling-in-polar-regions.html#overlay-between-different-projections"><span class="toc-section-number">4.1</span> Overlay between different projections</a></li>
-<li><a href="data-handling-in-polar-regions.html#build-an-index-betweeen-the-raw-raster-data-and-the-polar-map-regions"><span class="toc-section-number">4.2</span> Build an index betweeen the raw raster data and the polar map regions</a></li>
+<li class="chapter" data-level="4" data-path="data-handling-in-polar-regions.html"><a href="data-handling-in-polar-regions.html"><i class="fa fa-check"></i><b>4</b> Data handling in polar regions</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-handling-in-polar-regions.html"><a href="data-handling-in-polar-regions.html#overlay-between-different-projections"><i class="fa fa-check"></i><b>4.1</b> Overlay between different projections</a></li>
+<li class="chapter" data-level="4.2" data-path="data-handling-in-polar-regions.html"><a href="data-handling-in-polar-regions.html#build-an-index-betweeen-the-raw-raster-data-and-the-polar-map-regions"><i class="fa fa-check"></i><b>4.2</b> Build an index betweeen the raw raster data and the polar map regions</a></li>
 </ul></li>
-<li class="has-sub"><a href="somap.html#somap"><span class="toc-section-number">5</span> SOmap</a><ul>
-<li><a href="somap.html#circumpolar-maps"><span class="toc-section-number">5.1</span> Circumpolar maps</a></li>
-<li><a href="somap.html#adding-points"><span class="toc-section-number">5.2</span> Adding points</a></li>
+<li class="chapter" data-level="5" data-path="somap.html"><a href="somap.html"><i class="fa fa-check"></i><b>5</b> SOmap</a><ul>
+<li class="chapter" data-level="5.1" data-path="somap.html"><a href="somap.html#circumpolar-maps"><i class="fa fa-check"></i><b>5.1</b> Circumpolar maps</a></li>
+<li class="chapter" data-level="5.2" data-path="somap.html"><a href="somap.html#adding-points"><i class="fa fa-check"></i><b>5.2</b> Adding points</a></li>
 </ul></li>
 </ul>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-12">
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Challenges working with data in polar regions</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
 <div id="header">
 <h1 class="title">Challenges working with data in polar regions</h1>
-<h4 class="author"><em>Michael Sumner</em></h4>
+<p class="author"><em>Michael Sumner</em></p>
 </div>
 <div id="about-this" class="section level1">
 <h1><span class="header-section-number">1</span> About this</h1>
@@ -181,23 +188,58 @@ img {
 </div>
 </div>
 </div>
-<p style="text-align: center;">
-<a href="getting-set-up.html"><button class="btn btn-default">Next</button></a>
-</p>
-</div>
-</div>
+            </section>
 
+          </div>
+        </div>
+      </div>
 
-</div>
-
+<a href="getting-set-up.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-
-// add bootstrap table styles to pandoc tables
-$(document).ready(function () {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
 });
-
+});
 </script>
 
 </body>
+
 </html>

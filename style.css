@@ -1,0 +1,20 @@
+.exercise {
+    padding-left: 2em;
+    border: 1px solid;
+    color: #586E75;
+    background-color: #FDF6E3;
+}
+p.caption {
+  color: #777;
+  margin-top: 10px;
+}
+p code {
+  white-space: inherit;
+}
+pre {
+  word-break: normal;
+  word-wrap: normal;
+}
+pre code {
+  white-space: inherit;
+}

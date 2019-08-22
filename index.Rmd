@@ -1,9 +1,12 @@
 ---
 title: "Challenges working with data in polar regions"
-author: Michael Sumner
-description: Challenges working with data in polar regions. 
-documentclass: book
+author: "Michael Sumner"
+date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+github-repo: mdsumner/polar-mapping-oghub
+description: "Problems with data in polar regions, especially for mapping."
 ---
 
 # About this

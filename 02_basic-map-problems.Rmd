@@ -80,12 +80,8 @@ plot(wrld_simpl, add = TRUE)
 > > ## OR 
 > > maps_c$range
 > > ```
-> > 
 > {: .solution}
-{: .challenge}
-
-> ## Exercise
->
+> 
 > Can we draw polygons with a fill colour with the maps package? 
 >
 > > ## Solution

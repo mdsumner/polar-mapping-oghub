@@ -1,5 +1,5 @@
 
-# Getting Set Up
+# Getting Set Up {#setup}
 
 We need the following packages installed, using `remotes` is the best way to install as it will not re-install any package if it's already up to date. 
 

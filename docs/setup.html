@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Challenges working with data in polar regions</title>
+  <title>Chapter 2 Getting Set Up | Challenges working with data in polar regions</title>
   <meta name="description" content="Problems with data in polar regions, especially for mapping." />
   <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Challenges working with data in polar regions" />
+  <meta property="og:title" content="Chapter 2 Getting Set Up | Challenges working with data in polar regions" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="mdsumner/polar-mapping-oghub" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Challenges working with data in polar regions" />
+  <meta name="twitter:title" content="Chapter 2 Getting Set Up | Challenges working with data in polar regions" />
   
   <meta name="twitter:description" content="Problems with data in polar regions, especially for mapping." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="setup.html"/>
+<link rel="prev" href="index.html"/>
+<link rel="next" href="polar-maps.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -168,41 +168,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Challenges working with data in polar regions</h1>
-<p class="author"><em>Michael Sumner</em></p>
-<p class="date"><em>2019-08-22</em></p>
-</div>
-<div id="about-this" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> About this</h1>
-<p>This workshop is for R users interested in mapping in polar regions.</p>
-<p>This resource is published online at <a href="https://mdsumner.github.io/polar-mapping-oghub/" class="uri">https://mdsumner.github.io/polar-mapping-oghub/</a>.</p>
-<p>The source code to create this resource is available on Github at <a href="https://github.com/mdsumner/polar-mapping-oghub" class="uri">https://github.com/mdsumner/polar-mapping-oghub</a>.</p>
-<div id="description-and-objectives" class="section level2">
-<h2><span class="header-section-number">1.1</span> Description and objectives</h2>
-<p>Polar regions present specific problems for broad-scale mapping that often make it very hard to make a simple map from standard data types. Although generic tools are available for reprojecting coordinates and vector and raster data, it’s often not straightforward in practice especially over large regions and in polar areas. Problems are caused by compromises made for global data sets, wrapping problems at the anti-meridian and poles, the availability and sometimes assumptions by software authors. Most problems occur with broad-scale, hemisphere-wide maps and while these are less commonly used for analysis, they are used to prototype and trouble-shoot workflows. Common knowledge about projections and choosing them for particular purposes is not widely shared, even though they are very powerful for visualization and analysis at any scale.</p>
-<p>This R session will explain the fundamentals of some of these problems and the issues involved with projections, visualizations, analyses and measurements and provide techniques for using map projections in polar regions. We will also introduce some some emerging tools that aim to make life easier and ease the process of working with map projections.</p>
-<p><strong>Installation instructions</strong>:</p>
-<p><a href="https://mdsumner.github.io/polar-mapping-oghub/getting-set-up.html#getting-set-up" class="uri">https://mdsumner.github.io/polar-mapping-oghub/getting-set-up.html#getting-set-up</a></p>
-<p><strong>Datasets in use</strong>:</p>
-<p>Coastline from <a href="https://CRAN.r-project.org/package=maps">maps</a> package, <code>wrld_simpl</code> polygons from <a href="https://CRAN.r-project.org/package=maptools">maptools</a> package, example <a href="https://www.ncdc.noaa.gov/oisst">sea surface temperature</a> data (OISST 2019-08-06), example <a href="https://nsidc.org/data/nsidc-0051">sea ice concentration</a> data (NSIDC 2019-08-06), <code>aes_zone</code> and <code>aes_zone_ll</code> <a href="https://australianantarcticdivision.github.io/aceecostats/articles/static-variables-area.html">regional polar polygons</a> as used in Trebilco et al. (2019)</p>
-<div id="references" class="section level3">
-<h3><span class="header-section-number">1.1.1</span> References</h3>
-<p>Trebilco et al. (2019, in press) Assessing status and trends of open ocean habitats: a regionally resolved approach and Southern Ocean application. Ecological Indicators</p>
-<p>M.J. Brasier, A. Constable, J. Melbourne-Thomas, R. Trebilco, H. Griffiths, A. Van de Putte, M. Sumner (2019) Observations and models to support the first Marine Ecosystem Assessment for the Southern Ocean (MEASO), Journal of Marine Systems, 197, <a href="https://doi.org/10.1016/j.jmarsys.2019.05.008" class="uri">https://doi.org/10.1016/j.jmarsys.2019.05.008</a></p>
-<p>Dale Maschette, Michael Sumner and Ben Raymond (2019). SOmap: Southern Ocean maps. R package version 0.4.0.
-<a href="https://australianantarcticdivision.github.io/SOmap/">https://australianantarcticdivision.github.io/SOmap/</a></p>
+<div id="setup" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Getting Set Up</h1>
+<p>We need the following packages installed, using <code>remotes</code> is the best way to install as it will not re-install any package if it’s already up to date.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">## make sure we have the packages we need</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;remotes&quot;</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">  <span class="kw">install.packages</span>(<span class="st">&quot;remotes&quot;</span>)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">req1 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;maps&quot;</span>, <span class="st">&quot;maptools&quot;</span>, <span class="st">&quot;raster&quot;</span>, <span class="st">&quot;sp&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;rgdal&quot;</span>)</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">remotes<span class="op">::</span><span class="kw">install_cran</span>(req1)</a></code></pre></div>
+<p>Obtain some extra data sets that will be used in this session.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="cf">if</span> (<span class="op">!</span><span class="kw">file.exists</span>(<span class="st">&quot;polar-mapping.Rdata&quot;</span>)) {</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"> <span class="kw">download.file</span>(<span class="st">&quot;https://github.com/mdsumner/polar-mapping-oghub/raw/master/data-raw/polar-mapping.Rdata&quot;</span>, </a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">               <span class="st">&quot;polar-mapping.Rdata&quot;</span>, <span class="dt">mode =</span> <span class="st">&quot;wb&quot;</span>)</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="kw">load</span>(<span class="st">&quot;polar-mapping.Rdata&quot;</span>)</a></code></pre></div>
 
-</div>
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-
-<a href="setup.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="polar-maps.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -232,7 +221,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/mdsumner/polar-mapping-oghub/edit/master/index.Rmd",
+"link": "https://github.com/mdsumner/polar-mapping-oghub/edit/master/01_getting_set_up.Rmd",
 "text": "Edit"
 },
 "history": {

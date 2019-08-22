@@ -136,10 +136,9 @@ img {
 <li><a href="getting-set-up.html#getting-set-up"><span class="toc-section-number">2</span> Getting Set Up</a></li>
 <li class="has-sub"><a href="polar-maps.html#polar-maps"><span class="toc-section-number">3</span> Polar maps</a><ul>
 <li><a href="polar-maps.html#mapping-in-r"><span class="toc-section-number">3.1</span> Mapping in R</a></li>
-<li><a href="polar-maps.html#exercises-01"><span class="toc-section-number">3.2</span> Exercises 01</a></li>
-<li><a href="polar-maps.html#lets-use-the-maps-data"><span class="toc-section-number">3.3</span> Let’s use the maps data!</a></li>
-<li><a href="polar-maps.html#reprojecting-to-polar-regions"><span class="toc-section-number">3.4</span> Reprojecting to polar regions</a></li>
-<li><a href="polar-maps.html#demonstration-of-the-projection-concept"><span class="toc-section-number">3.5</span> Demonstration of the projection concept</a></li>
+<li><a href="polar-maps.html#lets-use-the-maps-data"><span class="toc-section-number">3.2</span> Let’s use the maps data!</a></li>
+<li><a href="polar-maps.html#reprojecting-to-polar-regions"><span class="toc-section-number">3.3</span> Reprojecting to polar regions</a></li>
+<li><a href="polar-maps.html#demonstration-of-the-projection-concept"><span class="toc-section-number">3.4</span> Demonstration of the projection concept</a></li>
 </ul></li>
 <li class="has-sub"><a href="data-handling-in-polar-regions.html#data-handling-in-polar-regions"><span class="toc-section-number">4</span> Data handling in polar regions</a><ul>
 <li><a href="data-handling-in-polar-regions.html#overlay-between-different-projections"><span class="toc-section-number">4.1</span> Overlay between different projections</a></li>
@@ -201,94 +200,117 @@ are handy for exploring concepts ).</p>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw">rect</span>(<span class="dt">xleft =</span> <span class="dv">-180</span>, <span class="dt">ybottom =</span> <span class="dv">-90</span>, <span class="dt">xright =</span> <span class="dv">180</span>, <span class="dt">ytop =</span> <span class="dv">90</span>, <span class="dt">border =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw">plot</span>(wrld_simpl, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/lon180-lat90-1.png" width="672" /></p>
-</div>
-<div id="exercises-01" class="section level2">
-<h2><span class="header-section-number">3.2</span> Exercises 01</h2>
-<ol style="list-style-type: decimal">
-<li>How can we find the longitude and latitude ranges of the maps data <code>maps_c</code> and the maptools data <code>wrld_simpl</code>?</li>
-<li>Can we draw polygons with a fill colour with the maps package?</li>
-</ol>
-<p>Answer 1: <code>range(m$x, na.rm = TRUE)</code> <code>range(m$y, na.rm = TRUE</code>) also <code>m$range</code></p>
-<p>Answer 2: <code>polygon(lonlat, col = &quot;grey&quot;)</code> does not work, and <code>map(mp, fill = TRUE, col = &quot;grey&quot;)</code> does not work, but <code>maps::map(fill = TRUE, col = &quot;grey&quot;)</code> does seem to work.</p>
+<blockquote>
+<h2 id="exercise"><span class="header-section-number">3.1</span> Exercise</h2>
+<p>How can we find the longitude and latitude ranges of the maps data <code>maps_c</code> and the maptools data <code>wrld_simpl</code>?</p>
+<blockquote>
+<h2 id="solution"><span class="header-section-number">3.1</span> Solution</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">range</span>(maps_c<span class="op">$</span>x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## [1] -180.0000  190.2708</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">range</span>(maps_c<span class="op">$</span>y, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>## [1] -85.19218  83.59961</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co">## OR </span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">maps_c<span class="op">$</span>range</a></code></pre></div>
+<pre><code>## [1] -180.00000  190.27084  -85.19218   83.59961</code></pre>
+<p>{: .solution}
+{: .challenge}</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<h2 id="exercise-1"><span class="header-section-number">3.1</span> Exercise</h2>
+<p>Can we draw polygons with a fill colour with the maps package?</p>
+<blockquote>
+<h2 id="solution-1"><span class="header-section-number">3.1</span> Solution</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">maps<span class="op">::</span><span class="kw">map</span>(<span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/polygon-challenge-1.png" width="672" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">plot</span>(lonlat)</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="kw">polygon</span>(lonlat, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/polygon-challenge-2.png" width="672" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">map</span>(maps_c, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a></code></pre></div>
+<p><img src="_main_files/figure-html/polygon-challenge-3.png" width="672" /></p>
+<p>{: .solution}
+{: .challenge}</p>
+</blockquote>
+</blockquote>
 <p>What’s going on? Look at the very south-eastern corner of the map. The “coastline” has been extended to the very south boundary of the available area.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">150</span>, <span class="dv">180</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">90</span>, <span class="dv">-60</span>))</a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">plot</span>(wrld_simpl, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw">rect</span>(<span class="dt">xleft =</span> <span class="dv">-180</span>, <span class="dt">ybottom =</span> <span class="dv">-90</span>, <span class="dt">xright =</span> <span class="dv">180</span>, <span class="dt">ytop =</span> <span class="dv">90</span>, <span class="dt">border =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">maps<span class="op">::</span><span class="kw">map</span>(<span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">150</span>, <span class="dv">180</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">90</span>, <span class="dv">-60</span>))</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="kw">plot</span>(wrld_simpl, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw">rect</span>(<span class="dt">xleft =</span> <span class="dv">-180</span>, <span class="dt">ybottom =</span> <span class="dv">-90</span>, <span class="dt">xright =</span> <span class="dv">180</span>, <span class="dt">ytop =</span> <span class="dv">90</span>, <span class="dt">border =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5">maps<span class="op">::</span><span class="kw">map</span>(<span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/south-east-1.png" width="672" /></p>
 <p>When we add the old maps coastline see that it does not extend to 90S and it does not traverse the southern boundary.</p>
 <p>One reason for this is that if we choose a projection where the east and west edges of the Antarctic coastline meet then we get what looks a fairly clean join.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co">## scale factor</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">f &lt;-<span class="st"> </span><span class="fl">3e6</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">plot</span>(rgdal<span class="op">::</span><span class="kw">project</span>(lonlat, <span class="st">&quot;+proj=laea +lat_0=-90 +datum=WGS84&quot;</span>), <span class="dt">asp =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="co">## scale factor</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">f &lt;-<span class="st"> </span><span class="fl">3e6</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="kw">plot</span>(rgdal<span class="op">::</span><span class="kw">project</span>(lonlat, <span class="st">&quot;+proj=laea +lat_0=-90 +datum=WGS84&quot;</span>), <span class="dt">asp =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/laea-1.png" width="672" /></p>
 <p>If we try the same with <code>wrld_simpl</code> it’s not as neat. We have a strange “seam” that points exactly to the south pole (our projection is centred on longitude = 0, and latitude = -90.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">plot</span>(sp<span class="op">::</span><span class="kw">spTransform</span>(wrld_simpl, <span class="st">&quot;+proj=laea +lat_0=-90 +datum=WGS84&quot;</span>), <span class="dt">asp =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">0</span>, <span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">plot</span>(sp<span class="op">::</span><span class="kw">spTransform</span>(wrld_simpl, <span class="st">&quot;+proj=laea +lat_0=-90 +datum=WGS84&quot;</span>), <span class="dt">asp =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">0</span>, <span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/wrld-1.png" width="672" /></p>
 </div>
 <div id="lets-use-the-maps-data" class="section level2">
-<h2><span class="header-section-number">3.3</span> Let’s use the maps data!</h2>
+<h2><span class="header-section-number">3.2</span> Let’s use the maps data!</h2>
 <p>In <code>maps_c</code> we have the maps data structure, and this looks promising.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">str</span>(maps_c)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">str</span>(maps_c)</a></code></pre></div>
 <pre><code>## List of 4
 ##  $ x    : num [1:82403] -69.9 -69.9 -69.9 -70 -70.1 ...
 ##  $ y    : num [1:82403] 12.5 12.4 12.4 12.5 12.5 ...
 ##  $ range: num [1:4] -180 190.3 -85.2 83.6
 ##  $ names: chr [1:1627] &quot;Aruba&quot; &quot;Afghanistan&quot; &quot;Angola&quot; &quot;Angola:Cabinda&quot; ...
 ##  - attr(*, &quot;class&quot;)= chr &quot;map&quot;</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">mp &lt;-<span class="st"> </span>maps_c</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">pxy &lt;-<span class="st"> </span>rgdal<span class="op">::</span><span class="kw">project</span>(lonlat, <span class="st">&quot;+proj=laea +lat_0=-90 +datum=WGS84&quot;</span>)</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">mp<span class="op">$</span>x &lt;-<span class="st"> </span>pxy[,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">mp<span class="op">$</span>y &lt;-<span class="st"> </span>pxy[,<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">mp<span class="op">$</span>range &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">range</span>(mp<span class="op">$</span>x,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>), <span class="kw">range</span>(mp<span class="op">$</span>y, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6">mp<span class="op">$</span>range</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">mp &lt;-<span class="st"> </span>maps_c</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2">pxy &lt;-<span class="st"> </span>rgdal<span class="op">::</span><span class="kw">project</span>(lonlat, <span class="st">&quot;+proj=laea +lat_0=-90 +datum=WGS84&quot;</span>)</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">mp<span class="op">$</span>x &lt;-<span class="st"> </span>pxy[,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4">mp<span class="op">$</span>y &lt;-<span class="st"> </span>pxy[,<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb22-5" data-line-number="5">mp<span class="op">$</span>range &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">range</span>(mp<span class="op">$</span>x,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>), <span class="kw">range</span>(mp<span class="op">$</span>y, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb22-6" data-line-number="6">mp<span class="op">$</span>range</a></code></pre></div>
 <pre><code>## [1] -12709814  12704237 -12576156  12470787</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">asp =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2">maps<span class="op">::</span><span class="kw">map</span>(mp, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">asp =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">maps<span class="op">::</span><span class="kw">map</span>(mp, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/maps-data-1.png" width="672" /></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co">## but it doesn&#39;t take much to go awry</span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">asp =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">maps<span class="op">::</span><span class="kw">map</span>(mp, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co">## but it doesn&#39;t take much to go awry</span></a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">asp =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">maps<span class="op">::</span><span class="kw">map</span>(mp, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/maps-data-2.png" width="672" /></p>
 <p>The problem is that the maps database has enough internal structure to join lines correctly, with <code>NA</code> gaps between different connected linestrings, but not enough to draw these things as polygons. A similar problem occurs in the default projection. While <code>wrld_simpl</code> has been extend by placing two dummy coordinates at the east and west versions of the south pole, this data set does not have those.</p>
 <p>We have to look quite carefully to understand what is happening, but this is wrapping around overlapping itself and so close to the southern bound we barely notice.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">180</span>, <span class="dv">-110</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">90</span>, <span class="dv">-60</span>))</a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw">rect</span>(<span class="dt">xleft =</span> <span class="dv">-180</span>, <span class="dt">ybottom =</span> <span class="dv">-90</span>, <span class="dt">xright =</span> <span class="dv">180</span>, <span class="dt">ytop =</span> <span class="dv">90</span>, <span class="dt">border =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5">maps<span class="op">::</span><span class="kw">map</span>(<span class="dt">add =</span> <span class="ot">TRUE</span>,<span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">180</span>, <span class="dv">-110</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">90</span>, <span class="dv">-60</span>))</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb26-3" data-line-number="3"><span class="kw">rect</span>(<span class="dt">xleft =</span> <span class="dv">-180</span>, <span class="dt">ybottom =</span> <span class="dv">-90</span>, <span class="dt">xright =</span> <span class="dv">180</span>, <span class="dt">ytop =</span> <span class="dv">90</span>, <span class="dt">border =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">maps<span class="op">::</span><span class="kw">map</span>(<span class="dt">add =</span> <span class="ot">TRUE</span>,<span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/no-pole-1.png" width="672" /></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">maps<span class="op">::</span><span class="kw">map</span>(<span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">maps<span class="op">::</span><span class="kw">map</span>(<span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/no-pole-2.png" width="672" /></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">mpmerc &lt;-<span class="st"> </span>maps_c</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2">pxy &lt;-<span class="st"> </span>rgdal<span class="op">::</span><span class="kw">project</span>(lonlat, <span class="st">&quot;+proj=merc +datum=WGS84&quot;</span>)</a>
-<a class="sourceLine" id="cb19-3" data-line-number="3">mpmerc<span class="op">$</span>x &lt;-<span class="st"> </span>pxy[,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb19-4" data-line-number="4">mpmerc<span class="op">$</span>y &lt;-<span class="st"> </span>pxy[,<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb19-5" data-line-number="5">mpmerc<span class="op">$</span>range &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">range</span>(mpmerc<span class="op">$</span>x,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>), <span class="kw">range</span>(mpmerc<span class="op">$</span>y, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb19-6" data-line-number="6">mpmerc<span class="op">$</span>range</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">mpmerc &lt;-<span class="st"> </span>maps_c</a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">pxy &lt;-<span class="st"> </span>rgdal<span class="op">::</span><span class="kw">project</span>(lonlat, <span class="st">&quot;+proj=merc +datum=WGS84&quot;</span>)</a>
+<a class="sourceLine" id="cb28-3" data-line-number="3">mpmerc<span class="op">$</span>x &lt;-<span class="st"> </span>pxy[,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb28-4" data-line-number="4">mpmerc<span class="op">$</span>y &lt;-<span class="st"> </span>pxy[,<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">mpmerc<span class="op">$</span>range &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">range</span>(mpmerc<span class="op">$</span>x,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>), <span class="kw">range</span>(mpmerc<span class="op">$</span>y, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6">mpmerc<span class="op">$</span>range</a></code></pre></div>
 <pre><code>## [1] -20037508  20037508 -20179524  18351859</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co">## the catastrophe made a little clearer </span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">xlim =</span> <span class="kw">range</span>(mpmerc<span class="op">$</span>range[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]), <span class="dt">ylim =</span> <span class="kw">c</span>(mpmerc<span class="op">$</span>range[<span class="dv">1</span>], <span class="dv">0</span>))</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">maps<span class="op">::</span><span class="kw">map</span>(mpmerc,  <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="co">## the catastrophe made a little clearer </span></a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">xlim =</span> <span class="kw">range</span>(mpmerc<span class="op">$</span>range[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]), <span class="dt">ylim =</span> <span class="kw">c</span>(mpmerc<span class="op">$</span>range[<span class="dv">1</span>], <span class="dv">0</span>))</a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">maps<span class="op">::</span><span class="kw">map</span>(mpmerc,  <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/no-pole-3.png" width="672" /></p>
 </div>
 <div id="reprojecting-to-polar-regions" class="section level2">
-<h2><span class="header-section-number">3.4</span> Reprojecting to polar regions</h2>
+<h2><span class="header-section-number">3.3</span> Reprojecting to polar regions</h2>
 <p>In essence it should be easy, but details really matter.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">sst &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">raster</span>(<span class="kw">system.file</span>(<span class="st">&quot;nc/reduced.nc&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;stars&quot;</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">sst &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">raster</span>(<span class="kw">system.file</span>(<span class="st">&quot;nc/reduced.nc&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;stars&quot;</span>, <span class="dt">mustWork =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>## Warning in .varName(nc, varname, warn = warn): varname used is: sst
 ## If that is not correct, you can set it to one of: sst, anom, err, ice</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">plot</span>(raster<span class="op">::</span><span class="kw">projectRaster</span>(sst, <span class="dt">crs =</span> <span class="st">&quot;+proj=laea +lat_0=-90&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">plot</span>(raster<span class="op">::</span><span class="kw">projectRaster</span>(sst, <span class="dt">crs =</span> <span class="st">&quot;+proj=laea +lat_0=-90&quot;</span>))</a></code></pre></div>
 <pre><code>## Warning in rgdal::rawTransform(projfrom, projto, nrow(xy), xy[, 1], xy[, :
 ## 48 projected point(s) not finite</code></pre>
 <pre><code>## Warning in rgdal::rawTransform(projto_int, projfrom, nrow(xy), xy[, 1], :
 ## 6211 projected point(s) not finite</code></pre>
 <p><img src="_main_files/figure-html/raster-reprojection-1.png" width="672" /></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="kw">plot</span>(raster<span class="op">::</span><span class="kw">projectRaster</span>(<span class="kw">rotate</span>(sst), <span class="dt">crs =</span> <span class="st">&quot;+proj=laea +lat_0=-90&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1"><span class="kw">plot</span>(raster<span class="op">::</span><span class="kw">projectRaster</span>(<span class="kw">rotate</span>(sst), <span class="dt">crs =</span> <span class="st">&quot;+proj=laea +lat_0=-90&quot;</span>))</a></code></pre></div>
 <pre><code>## Warning in rgdal::rawTransform(projfrom, projto, nrow(xy), xy[, 1], xy[, :
 ## 48 projected point(s) not finite</code></pre>
 <pre><code>## Warning in rgdal::rawTransform(projto_int, projfrom, nrow(xy), xy[, 1], :
@@ -297,22 +319,22 @@ are handy for exploring concepts ).</p>
 <p>Loxodromes need densifying, and not along great circles.</p>
 <p>The pole is undefined in Mercator.</p>
 <p>Sensible polar projections are stereographic and Lambert Azimuthal Equal Area. These are more or less identical over a large area, so knowing what is in use really matters!</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;wrld_simpl&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;maptools&quot;</span>)</a>
-<a class="sourceLine" id="cb30-2" data-line-number="2">laea &lt;-<span class="st"> &quot;+proj=laea +lon_0=0 +lat_0=-90 +datum=WGS84&quot;</span></a>
-<a class="sourceLine" id="cb30-3" data-line-number="3">stere &lt;-<span class="st"> &quot;+proj=stere +lon_0=0 +lat_0=-90 +datum=WGS84&quot;</span></a>
-<a class="sourceLine" id="cb30-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb30-5" data-line-number="5">wm &lt;-<span class="st"> </span>wrld_simpl[<span class="kw">coordinates</span>(wrld_simpl)[,<span class="dv">2</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>, ]</a>
-<a class="sourceLine" id="cb30-6" data-line-number="6"> </a>
-<a class="sourceLine" id="cb30-7" data-line-number="7"><span class="co">## remember that plotting in R is usually *NOT* coordinate system aware ...</span></a>
-<a class="sourceLine" id="cb30-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb30-9" data-line-number="9"><span class="kw">plot</span>(<span class="kw">spTransform</span>(wm, laea))</a>
-<a class="sourceLine" id="cb30-10" data-line-number="10"><span class="kw">plot</span>(<span class="kw">spTransform</span>(wm, stere), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">border =</span> <span class="st">&quot;firebrick&quot;</span>)</a>
-<a class="sourceLine" id="cb30-11" data-line-number="11"><span class="kw">points</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">cex =</span> <span class="dv">40</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw">data</span>(<span class="st">&quot;wrld_simpl&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;maptools&quot;</span>)</a>
+<a class="sourceLine" id="cb39-2" data-line-number="2">laea &lt;-<span class="st"> &quot;+proj=laea +lon_0=0 +lat_0=-90 +datum=WGS84&quot;</span></a>
+<a class="sourceLine" id="cb39-3" data-line-number="3">stere &lt;-<span class="st"> &quot;+proj=stere +lon_0=0 +lat_0=-90 +datum=WGS84&quot;</span></a>
+<a class="sourceLine" id="cb39-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb39-5" data-line-number="5">wm &lt;-<span class="st"> </span>wrld_simpl[<span class="kw">coordinates</span>(wrld_simpl)[,<span class="dv">2</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>, ]</a>
+<a class="sourceLine" id="cb39-6" data-line-number="6"> </a>
+<a class="sourceLine" id="cb39-7" data-line-number="7"><span class="co">## remember that plotting in R is usually *NOT* coordinate system aware ...</span></a>
+<a class="sourceLine" id="cb39-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb39-9" data-line-number="9"><span class="kw">plot</span>(<span class="kw">spTransform</span>(wm, laea))</a>
+<a class="sourceLine" id="cb39-10" data-line-number="10"><span class="kw">plot</span>(<span class="kw">spTransform</span>(wm, stere), <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">border =</span> <span class="st">&quot;firebrick&quot;</span>)</a>
+<a class="sourceLine" id="cb39-11" data-line-number="11"><span class="kw">points</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dt">cex =</span> <span class="dv">40</span>)</a></code></pre></div>
 <p><img src="_main_files/figure-html/polar-laea-1.png" width="672" /></p>
 <p>This video explains the Lambert Azimuthal Equal Area projection: <a href="https://www.youtube.com/watch?v=quzIU4nL9ig" class="uri">https://www.youtube.com/watch?v=quzIU4nL9ig</a> (crux at 2:25 with the spherical shells).</p>
 </div>
 <div id="demonstration-of-the-projection-concept" class="section level2">
-<h2><span class="header-section-number">3.5</span> Demonstration of the projection concept</h2>
+<h2><span class="header-section-number">3.4</span> Demonstration of the projection concept</h2>
 <p>rgl plots Stereographic, LAEA, Orthographic</p>
 
 </div>

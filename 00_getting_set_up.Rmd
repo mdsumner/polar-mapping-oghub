@@ -1,8 +1,4 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: console
----
+
 # Getting Set Up
 
 We need the following packages installed, using `remotes` is the best way to install as it will not re-install any package if it's already up to date. 

@@ -1,12 +1,3 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: inline
----
-
-```{r preamble2, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 # Polar maps
 
@@ -17,9 +8,6 @@ What is required for mapping in polar regions?
 * projected maps can be very hard to do, each has its own issues
 * quantities like vector fields
 * conventions for global data -180/180, 0/360
-
-
-
 
 
 ## Mapping in R
@@ -62,7 +50,6 @@ abline(h = c(-90, 90), v = c(-180, 180))
 
 A very similar and slightly more modern data set is available in the `maptools` package.
 
-
 (It's not sensible use `maps` or `maptools` for coasline or country boundary data, but they
 are handy for exploring concepts ). 
 
@@ -80,16 +67,39 @@ rect(xleft = -180, ybottom = -90, xright = 180, ytop = 90, border = "darkred", l
 plot(wrld_simpl, add = TRUE)
 ```
 
-## Exercises 01
 
-1. How can we find the longitude and latitude ranges of the maps data `maps_c` and the maptools data `wrld_simpl`? 
-2. Can we draw polygons with a fill colour with the maps package? 
+> ## Exercise
+>
+> How can we find the longitude and latitude ranges of the maps data `maps_c` and the maptools data `wrld_simpl`? 
+>
+> > ## Solution
+> >
+> > ```{r scatter-challenge, answer=TRUE, purl=FALSE}
+> > range(maps_c$x, na.rm = TRUE)
+> > range(maps_c$y, na.rm = TRUE)
+> > ## OR 
+> > maps_c$range
+> > ```
+> > 
+> {: .solution}
+{: .challenge}
 
-
-Answer 1: `range(m$x, na.rm = TRUE)` `range(m$y, na.rm = TRUE`) also `m$range`
-
-Answer 2: `polygon(lonlat, col = "grey")` does not work, and `map(mp, fill = TRUE, col = "grey")` does not work, but `maps::map(fill = TRUE, col = "grey")` does seem to work.
-
+> ## Exercise
+>
+> Can we draw polygons with a fill colour with the maps package? 
+>
+> > ## Solution
+> >
+> > ```{r polygon-challenge, answer=TRUE, purl=FALSE}
+> > maps::map(fill = TRUE, col = "grey")
+> > 
+> > plot(lonlat)
+> > polygon(lonlat, col = "grey")
+> > map(maps_c, fill = TRUE, col = "grey")
+> > ```
+> > 
+> {: .solution}
+{: .challenge}
 
 What's going on? Look at the very south-eastern corner of the map. The "coastline" has been extended to the very south boundary of the available area. 
 

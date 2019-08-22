@@ -1,12 +1,4 @@
----
-output: html_document
-editor_options: 
-  chunk_output_type: inline
----
 
-```{r preamble3, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
 
 # Data handling in polar regions
 

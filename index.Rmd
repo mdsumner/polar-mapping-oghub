@@ -25,7 +25,7 @@ This R session will explain the fundamentals of some of these problems and the i
 
 **Installation instructions**:  
 
-https://mdsumner.github.io/polar-mapping-oghub/getting-set-up.html#getting-set-up
+https://mdsumner.github.io/polar-mapping-oghub/setup.html
 
 **Datasets in use**: 
 
@@ -34,7 +34,7 @@ Coastline from [maps](https://CRAN.r-project.org/package=maps) package, `wrld_si
 
 ### References
 
-Trebilco et al. (2019, in press) Assessing status and trends of open ocean habitats: a regionally resolved approach and Southern Ocean application. Ecological Indicators
+Trebilco et al. (2019) Assessing status and trends of open ocean habitats: a regionally resolved approach and Southern Ocean application. Ecological Indicators,  https://authors.elsevier.com/c/1ZaDJ,XRNLcsPf
 
 M.J. Brasier, A. Constable, J. Melbourne-Thomas, R. Trebilco, H. Griffiths, A. Van de Putte, M. Sumner (2019) Observations and models to support the first Marine Ecosystem Assessment for the Southern Ocean (MEASO), Journal of Marine Systems, 197, https://doi.org/10.1016/j.jmarsys.2019.05.008
 

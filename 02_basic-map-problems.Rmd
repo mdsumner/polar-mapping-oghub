@@ -67,35 +67,48 @@ rect(xleft = -180, ybottom = -90, xright = 180, ytop = 90, border = "darkred", l
 plot(wrld_simpl, add = TRUE)
 ```
 
+## Exercise 1
 
-> ## Exercise
->
-> How can we find the longitude and latitude ranges of the maps data `maps_c` and the maptools data `wrld_simpl`? 
->
-> > ## Solution
-> >
-> > ```{r scatter-challenge, answer=TRUE, purl=FALSE}
-> > range(maps_c$x, na.rm = TRUE)
-> > range(maps_c$y, na.rm = TRUE)
-> > ## OR 
-> > maps_c$range
-> > ```
-> {: .solution}
-> 
-> Can we draw polygons with a fill colour with the maps package? 
->
-> > ## Solution
-> >
-> > ```{r polygon-challenge, answer=TRUE, purl=FALSE}
-> > maps::map(fill = TRUE, col = "grey")
-> > 
-> > plot(lonlat)
-> > polygon(lonlat, col = "grey")
-> > map(maps_c, fill = TRUE, col = "grey")
-> > ```
-> > 
-> {: .solution}
-{: .challenge}
+How can we find the longitude and latitude ranges of the maps data `maps_c` and the maptools data `wrld_simpl`? 
+
+```{r maps-extent, exercise=TRUE}
+str(maps_c)
+```
+
+
+
+Answer: 
+
+```{r maps-extent-solution}
+range(maps_c$x, na.rm = TRUE)
+range(maps_c$y, na.rm = TRUE)
+## OR 
+maps_c$range
+```
+
+## Exercise 2
+
+Can we draw polygons with a fill colour with the maps package? 
+
+
+Why don't these work? 
+
+```{r maps-polygon, exercise=TRUE}
+plot(lonlat)
+polygon(lonlat, col = "grey")
+map(maps_c, fill = TRUE, col = "grey")
+```
+
+
+
+Answer: 
+
+
+```{r maps-polygon-solution}
+maps::map(fill = TRUE, col = "grey")
+```
+
+## Polygon catastrophe
 
 What's going on? Look at the very south-eastern corner of the map. The "coastline" has been extended to the very south boundary of the available area. 
 
@@ -129,6 +142,19 @@ plot(sp::spTransform(wrld_simpl, "+proj=laea +lat_0=-90 +datum=WGS84"), asp = 1,
 abline(v = 0, h = 0, lty = 2, col = "grey")
 ```
 
+## Exercise 3
+
+How can we add our own data, a set of points, onto the polar map? 
+
+Add the `pts` matrix of longitude/latitude to this map, or define your points and add those. 
+
+```{r wrld-addplot}
+plot(sp::spTransform(wrld_simpl, "+proj=laea +lat_0=-90 +datum=WGS84"))
+pts <- cbind(seq(-180, 175, by = 5), 
+             -72)
+```
+
+Hint: we need the coordinate reference system string **"+proj=laea +lat_0=-90 +datum=WGS84"** and a function to transform a matrix of longitude-latitude values. 
 
 ## Let's use the maps data!
 
@@ -186,7 +212,7 @@ maps::map(mpmerc,  fill = TRUE, col = "grey", add = TRUE)
 
 ## Reprojecting to polar regions
 
-In essence it should be easy, but details really matter. 
+In essence it should be easy, but details really matter. Here the details of the format, the orientation and layout of the data (NetCDF, and common conventions used in physical ocean models)
 
 ```{r raster-reprojection}
 sst <- raster::raster(system.file("nc/reduced.nc", package = "stars", mustWork = TRUE))
@@ -195,9 +221,25 @@ plot(raster::projectRaster(sst, crs = "+proj=laea +lat_0=-90"))
 plot(raster::projectRaster(rotate(sst), crs = "+proj=laea +lat_0=-90"))
 ```
 
-Loxodromes need densifying, and not along great circles. 
+Straight lines in longitude/latitude do not maintain their shape when reprojected unless we add extra vertices along lines of constant longitude and latitude. The longitudes are great circles, but the latitude lines are not. 
 
-The pole is undefined in Mercator.
+```{r graticule-reproj}
+grat_lines <- rasterToPolygons(raster(extent(-180, 180, -75, 0), 
+                                      crs = "+proj=longlat +datum=WGS84", res = 30))
+plot(spTransform(grat_lines, "+proj=laea +lat_0=-90 +datum=WGS84"))
+
+```
+
+The pole is undefined in Mercator projection. 
+
+```{r mercator}
+rgdal::project(cbind(-180, 0), "+proj=merc")
+
+rgdal::project(cbind(-180, -60), "+proj=merc")
+
+rgdal::project(cbind(-180, -90), "+proj=merc")
+
+```
 
 Sensible polar projections are stereographic and Lambert Azimuthal Equal Area. These are more or less identical over a large area, so knowing what is in use really matters!
 

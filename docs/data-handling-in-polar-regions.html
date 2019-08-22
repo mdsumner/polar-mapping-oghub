@@ -136,9 +136,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2" data-path="setup.html"><a href="setup.html"><i class="fa fa-check"></i><b>2</b> Getting Set Up</a></li>
 <li class="chapter" data-level="3" data-path="polar-maps.html"><a href="polar-maps.html"><i class="fa fa-check"></i><b>3</b> Polar maps</a><ul>
 <li class="chapter" data-level="3.1" data-path="polar-maps.html"><a href="polar-maps.html#mapping-in-r"><i class="fa fa-check"></i><b>3.1</b> Mapping in R</a></li>
-<li class="chapter" data-level="3.2" data-path="polar-maps.html"><a href="polar-maps.html#lets-use-the-maps-data"><i class="fa fa-check"></i><b>3.2</b> Let’s use the maps data!</a></li>
-<li class="chapter" data-level="3.3" data-path="polar-maps.html"><a href="polar-maps.html#reprojecting-to-polar-regions"><i class="fa fa-check"></i><b>3.3</b> Reprojecting to polar regions</a></li>
-<li class="chapter" data-level="3.4" data-path="polar-maps.html"><a href="polar-maps.html#demonstration-of-the-projection-concept"><i class="fa fa-check"></i><b>3.4</b> Demonstration of the projection concept</a></li>
+<li class="chapter" data-level="3.2" data-path="polar-maps.html"><a href="polar-maps.html#exercise-1"><i class="fa fa-check"></i><b>3.2</b> Exercise 1</a></li>
+<li class="chapter" data-level="3.3" data-path="polar-maps.html"><a href="polar-maps.html#exercise-2"><i class="fa fa-check"></i><b>3.3</b> Exercise 2</a></li>
+<li class="chapter" data-level="3.4" data-path="polar-maps.html"><a href="polar-maps.html#polygon-catastrophe"><i class="fa fa-check"></i><b>3.4</b> Polygon catastrophe</a></li>
+<li class="chapter" data-level="3.5" data-path="polar-maps.html"><a href="polar-maps.html#exercise-3"><i class="fa fa-check"></i><b>3.5</b> Exercise 3</a></li>
+<li class="chapter" data-level="3.6" data-path="polar-maps.html"><a href="polar-maps.html#lets-use-the-maps-data"><i class="fa fa-check"></i><b>3.6</b> Let’s use the maps data!</a></li>
+<li class="chapter" data-level="3.7" data-path="polar-maps.html"><a href="polar-maps.html#reprojecting-to-polar-regions"><i class="fa fa-check"></i><b>3.7</b> Reprojecting to polar regions</a></li>
+<li class="chapter" data-level="3.8" data-path="polar-maps.html"><a href="polar-maps.html#demonstration-of-the-projection-concept"><i class="fa fa-check"></i><b>3.8</b> Demonstration of the projection concept</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-handling-in-polar-regions.html"><a href="data-handling-in-polar-regions.html"><i class="fa fa-check"></i><b>4</b> Data handling in polar regions</a><ul>
 <li class="chapter" data-level="4.1" data-path="data-handling-in-polar-regions.html"><a href="data-handling-in-polar-regions.html#overlay-between-different-projections"><i class="fa fa-check"></i><b>4.1</b> Overlay between different projections</a></li>
@@ -170,8 +174,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="data-handling-in-polar-regions" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Data handling in polar regions</h1>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&quot;polar-mapping.Rdata&quot;</span>)  <span class="co">## see getting-set-up</span></a>
-<a class="sourceLine" id="cb43-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">load</span>(<span class="st">&quot;polar-mapping.Rdata&quot;</span>)  <span class="co">## see getting-set-up</span></a>
+<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="kw">library</span>(dplyr)</a></code></pre></div>
 <pre><code>## 
 ## Attaching package: &#39;dplyr&#39;</code></pre>
 <pre><code>## The following objects are masked from &#39;package:raster&#39;:
@@ -184,52 +188,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
 <p>In practice, these kinds of problems in polar data mean that careful choices be made. For an involved whole-ecosystem assessment publication we generated a partition of the marine region of the Southern Ocean.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">plot</span>(aes_zone, <span class="dt">col =</span> aes_zone<span class="op">$</span>colour)</a>
-<a class="sourceLine" id="cb48-2" data-line-number="2"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="kw">plot</span>(aes_zone, <span class="dt">col =</span> aes_zone<span class="op">$</span>colour)</a>
+<a class="sourceLine" id="cb60-2" data-line-number="2"><span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="polar-mapping_files/figure-html/ace-ecostats-1.png" width="672" /></p>
 <p>This was easy for mapping sea ice concentration, we have daily remote sensing maps of southern ocean sea ice and it’s trivial to reproject our polygons onto those.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw">library</span>(raster)</a>
-<a class="sourceLine" id="cb49-2" data-line-number="2"><span class="kw">plot</span>(sea_ice)</a>
-<a class="sourceLine" id="cb49-3" data-line-number="3"><span class="kw">plot</span>(<span class="kw">spTransform</span>(aes_zone, raster<span class="op">::</span><span class="kw">projection</span>(sea_ice)), <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="kw">library</span>(raster)</a>
+<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw">plot</span>(sea_ice)</a>
+<a class="sourceLine" id="cb61-3" data-line-number="3"><span class="kw">plot</span>(<span class="kw">spTransform</span>(aes_zone, raster<span class="op">::</span><span class="kw">projection</span>(sea_ice)), <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="polar-mapping_files/figure-html/example-ice-1.png" width="672" /></p>
 <p>But when it comes to sea surface temperature, these data have a number of issues.</p>
 <p>One is that the data is natively in [0, 360] longitude range and if we project these data to our polar map we lose the western hemisphere.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">rtemp &lt;-<span class="st"> </span><span class="kw">raster</span>(aes_zone, <span class="dt">res =</span> <span class="dv">25000</span>)</a>
-<a class="sourceLine" id="cb50-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">projectRaster</span>(sea_temp, rtemp))</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">rtemp &lt;-<span class="st"> </span><span class="kw">raster</span>(aes_zone, <span class="dt">res =</span> <span class="dv">25000</span>)</a>
+<a class="sourceLine" id="cb62-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">projectRaster</span>(sea_temp, rtemp))</a></code></pre></div>
 <pre><code>## Warning in rgdal::rawTransform(projfrom, projto, nrow(xy), xy[, 1], xy[, :
 ## 53 projected point(s) not finite</code></pre>
 <p><img src="polar-mapping_files/figure-html/example-sst-1.png" width="672" /></p>
 <p>The solution to <em>that problem</em> is to shift the part of the raster that is over the dateline back to the west</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">sea_temp180 &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">rotate</span>(sea_temp)</a>
-<a class="sourceLine" id="cb52-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">projectRaster</span>(sea_temp180, rtemp))</a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1">sea_temp180 &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">rotate</span>(sea_temp)</a>
+<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">projectRaster</span>(sea_temp180, rtemp))</a></code></pre></div>
 <pre><code>## Warning in rgdal::rawTransform(projfrom, projto, nrow(xy), xy[, 1], xy[, :
 ## 53 projected point(s) not finite</code></pre>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" data-line-number="1"><span class="kw">plot</span>(aes_zone, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="kw">plot</span>(aes_zone, <span class="dt">add =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="polar-mapping_files/figure-html/example2-sst-1.png" width="672" /></p>
 <p>On the face of it this means we now have an easy job, simply project every sea surface temperature raster onto this polar map and then do the extraction.</p>
 <p>But, this is going to be slow, it’s a lot of work to reproject 10000+ raster grids, and it inevitably involves resampling (remodelling) of the underlying data, imposing assumptions about what the data means. This is more important for other quantities like wind speeds and water flow directions, but is for the same ultimate reasons.</p>
 <div id="overlay-between-different-projections" class="section level2">
 <h2><span class="header-section-number">4.1</span> Overlay between different projections</h2>
 <p>This is what the overlay process would be like, and we might think we can inverse-transform our polar polygons to this.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw">plot</span>(sea_temp180)</a>
-<a class="sourceLine" id="cb55-2" data-line-number="2"><span class="kw">plot</span>(aes_zone_ll, <span class="dt">add =</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" data-line-number="1"><span class="kw">plot</span>(sea_temp180)</a>
+<a class="sourceLine" id="cb67-2" data-line-number="2"><span class="kw">plot</span>(aes_zone_ll, <span class="dt">add =</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="polar-mapping_files/figure-html/native-grid-1.png" width="672" /></p>
 <p>But, it doesn’t look good. This is because the polar region that crosses the dateline is a single polygon, but in this projection it must be split in two pieces. This is why there is two objects <code>aes_zone</code> and <code>aes_zone_ll</code>. It can be a bit of work to construct these two versions but in our experience it really made things simpler, there’s simply a one-to-one relationship between the to data sets, one in longitude/latitude, and one in polar map coordinates.</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" data-line-number="1"><span class="kw">plot</span>(sea_temp180)</a>
-<a class="sourceLine" id="cb56-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">spTransform</span>(aes_zone, raster<span class="op">::</span><span class="kw">projection</span>(sea_temp180)), <span class="dt">add =</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" data-line-number="1"><span class="kw">plot</span>(sea_temp180)</a>
+<a class="sourceLine" id="cb68-2" data-line-number="2"><span class="kw">plot</span>(<span class="kw">spTransform</span>(aes_zone, raster<span class="op">::</span><span class="kw">projection</span>(sea_temp180)), <span class="dt">add =</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="polar-mapping_files/figure-html/native-grid2-1.png" width="672" /></p>
 </div>
 <div id="build-an-index-betweeen-the-raw-raster-data-and-the-polar-map-regions" class="section level2">
 <h2><span class="header-section-number">4.2</span> Build an index betweeen the raw raster data and the polar map regions</h2>
 <p>This is a really powerful trick for processing spatial data in R, and boils down to performing the extraction from the raster data in the native grid.</p>
 <p>Every pixel is the sea surface temperature data has a unique relationship with each polygon, it either belongs inside a single polygon or not. So we create this index by <strong>rasterizing</strong> the polygons into the grid. This seems backwards, but it means we now now which polygon every pixel belongs to.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1">aes_zone_ll<span class="op">$</span>row &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(aes_zone_ll)</a>
-<a class="sourceLine" id="cb57-2" data-line-number="2">raster_polys &lt;-<span class="st"> </span>fasterize<span class="op">::</span><span class="kw">fasterize</span>(sf<span class="op">::</span><span class="kw">st_as_sf</span>(aes_zone_ll), sea_temp180, <span class="dt">field =</span> <span class="st">&quot;row&quot;</span>)</a>
-<a class="sourceLine" id="cb57-3" data-line-number="3"><span class="kw">plot</span>(raster_polys)</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" data-line-number="1">aes_zone_ll<span class="op">$</span>row &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(aes_zone_ll)</a>
+<a class="sourceLine" id="cb69-2" data-line-number="2">raster_polys &lt;-<span class="st"> </span>fasterize<span class="op">::</span><span class="kw">fasterize</span>(sf<span class="op">::</span><span class="kw">st_as_sf</span>(aes_zone_ll), sea_temp180, <span class="dt">field =</span> <span class="st">&quot;row&quot;</span>)</a>
+<a class="sourceLine" id="cb69-3" data-line-number="3"><span class="kw">plot</span>(raster_polys)</a></code></pre></div>
 <p><img src="polar-mapping_files/figure-html/fasterize-1.png" width="672" /></p>
 <p>That is all the “geometry lookup” work required done. We can produce an index between raster cell and polygon in a simple table.</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" data-line-number="1">cell &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">polygon =</span> raster<span class="op">::</span><span class="kw">values</span>(raster_polys), <span class="dt">cell =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncell</span>(raster_polys))</a>
-<a class="sourceLine" id="cb58-2" data-line-number="2">cell</a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" data-line-number="1">cell &lt;-<span class="st"> </span>tibble<span class="op">::</span><span class="kw">tibble</span>(<span class="dt">polygon =</span> raster<span class="op">::</span><span class="kw">values</span>(raster_polys), <span class="dt">cell =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncell</span>(raster_polys))</a>
+<a class="sourceLine" id="cb70-2" data-line-number="2">cell</a></code></pre></div>
 <pre><code>## # A tibble: 1,036,800 x 2
 ##    polygon  cell
 ##      &lt;dbl&gt; &lt;int&gt;
@@ -244,9 +248,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9      NA     9
 ## 10      NA    10
 ## # … with 1,036,790 more rows</code></pre>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" data-line-number="1"><span class="co">## we don&#39;t need very cell, the most southerly region is NA as is anything north of 20S</span></a>
-<a class="sourceLine" id="cb60-2" data-line-number="2">cell &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(cell, <span class="op">!</span><span class="kw">is.na</span>(polygon))</a>
-<a class="sourceLine" id="cb60-3" data-line-number="3">cell</a></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" data-line-number="1"><span class="co">## we don&#39;t need very cell, the most southerly region is NA as is anything north of 20S</span></a>
+<a class="sourceLine" id="cb72-2" data-line-number="2">cell &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(cell, <span class="op">!</span><span class="kw">is.na</span>(polygon))</a>
+<a class="sourceLine" id="cb72-3" data-line-number="3">cell</a></code></pre></div>
 <pre><code>## # A tibble: 230,383 x 2
 ##    polygon   cell
 ##      &lt;dbl&gt;  &lt;int&gt;
@@ -262,13 +266,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10      12 691210
 ## # … with 230,373 more rows</code></pre>
 <p>To extract the values for this index we use <code>cell</code> and this takes very little time:</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1">cell<span class="op">$</span>sst &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">extract</span>(sea_temp180, cell<span class="op">$</span>cell)</a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb62-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb62-4" data-line-number="4">cell <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(polygon) <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">summarize</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(sst, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb62-5" data-line-number="5">                                                       <span class="dt">sd =</span> <span class="kw">sd</span>(sst, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb62-6" data-line-number="6">                                                       <span class="dt">min =</span> <span class="kw">min</span>(sst, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb62-7" data-line-number="7">                                                       <span class="dt">max =</span> <span class="kw">max</span>(sst, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" data-line-number="1">cell<span class="op">$</span>sst &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">extract</span>(sea_temp180, cell<span class="op">$</span>cell)</a>
+<a class="sourceLine" id="cb74-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb74-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb74-4" data-line-number="4">cell <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">group_by</span>(polygon) <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">summarize</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(sst, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
+<a class="sourceLine" id="cb74-5" data-line-number="5">                                                       <span class="dt">sd =</span> <span class="kw">sd</span>(sst, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
+<a class="sourceLine" id="cb74-6" data-line-number="6">                                                       <span class="dt">min =</span> <span class="kw">min</span>(sst, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
+<a class="sourceLine" id="cb74-7" data-line-number="7">                                                       <span class="dt">max =</span> <span class="kw">max</span>(sst, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 12 x 5
 ##    polygon   mean     sd    min   max
 ##      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
@@ -285,9 +289,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 11      11 -1.76  0.0367 -1.80  -1.48
 ## 12      12 11.3   4.66   -0.770 22.6</code></pre>
 <p>If we ran this using raster directly, it takes quite some time for a single layer and a single statistic, and if we have a lot of time slices it will really add up.</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="kw">system.time</span>(raster<span class="op">::</span><span class="kw">extract</span>(sea_temp180, aes_zone_ll, <span class="dt">fun =</span> mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="co">##   user  system elapsed </span></a>
-<a class="sourceLine" id="cb64-3" data-line-number="3"><span class="co">## 18.331   0.164  18.502 </span></a></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" data-line-number="1"><span class="kw">system.time</span>(raster<span class="op">::</span><span class="kw">extract</span>(sea_temp180, aes_zone_ll, <span class="dt">fun =</span> mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb76-2" data-line-number="2"><span class="co">##   user  system elapsed </span></a>
+<a class="sourceLine" id="cb76-3" data-line-number="3"><span class="co">## 18.331   0.164  18.502 </span></a></code></pre></div>
 
 </div>
 </div>

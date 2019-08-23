@@ -3,11 +3,11 @@ Package: Polar Mapping Challenges in R
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.1
 Authors@R: 
-    person(given = "First",
-           family = "Last",
+    person(given = "Michael",
+           family = "Sumner",
            role = c("aut", "cre"),
-           email = "first.last@example.com",
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+           email = "mdsumner@gmail.com",
+           comment = c(ORCID = "0000-0002-2471-7511"))
 Description: Polar regions present specific problems for
     broad-scale mapping that often make it very hard to make a simple map
     from standard data types. This workshop illustrates some of these
@@ -19,6 +19,7 @@ Depends:
     dplyr,
     fasterize,
     ggplot2,
+    knitr,
     maps,
     maptools,
     raster,

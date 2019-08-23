@@ -26,11 +26,13 @@ Depends:
     rmarkdown,
     roxygen2,
     sf,
+    SOmap,
     sp,
     tibble
 Remotes: 
     AustralianAntarcticDivision/aceecostats,
     AustralianAntarcticDivision/raadtools,
+    AustralianAntarcticDivision/SOmap,
     karthik/holepunch
 Encoding: UTF-8
 LazyData: true

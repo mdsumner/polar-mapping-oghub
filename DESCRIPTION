@@ -1,6 +1,36 @@
-Package: placeholder
-Type: Book
-Title: Does not matter.
+Type: Compendium
+Package: Polar Mapping Challenges in R
+Title: What the Package Does (One Line, Title Case)
 Version: 0.0.1
-Imports: bookdown
-Remotes: rstudio/bookdown
+Authors@R: 
+    person(given = "First",
+           family = "Last",
+           role = c("aut", "cre"),
+           email = "first.last@example.com",
+           comment = c(ORCID = "YOUR-ORCID-ID"))
+Description: Polar regions present specific problems for
+    broad-scale mapping that often make it very hard to make a simple map
+    from standard data types. This workshop illustrates some of these
+    problems and provides some guidance.
+License: What license it uses
+Depends: 
+    bookdown,
+    devtools,
+    dplyr,
+    fasterize,
+    ggplot2,
+    maps,
+    maptools,
+    raster,
+    rgdal,
+    rmarkdown,
+    roxygen2,
+    sf,
+    sp,
+    tibble
+Remotes: 
+    AustralianAntarcticDivision/aceecostats,
+    AustralianAntarcticDivision/raadtools,
+    karthik/holepunch
+Encoding: UTF-8
+LazyData: true

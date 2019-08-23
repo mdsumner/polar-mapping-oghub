@@ -19,3 +19,12 @@ generate_badge() # This generates a badge for your readme.
 # ready ahead of time.
 build_binder()
 #
+
+
+# <!-- badges: start -->
+#   [![Launch Rstudio Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mdsumner/polar-mapping-oghub/master?urlpath=rstudio)
+# <!-- badges: end -->
+
+
+
+

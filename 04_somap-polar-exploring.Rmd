@@ -77,7 +77,7 @@ SOmap()
 SOplot(my_points_ll, col = "blue")
 ```
 
-### Exercise 1
+## Exercise 1
 
 Why does `SOplot()` not need to use the projection? How does it know to plot the data correctly onto an existing plot? 
 

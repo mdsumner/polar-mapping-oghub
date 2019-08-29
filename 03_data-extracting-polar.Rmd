@@ -31,13 +31,28 @@ rtemp <- raster(aes_zone, res = 25000)
 plot(projectRaster(sea_temp, rtemp))
 ```
 
+## Exercise 4 
+
+Why is data east of the 180E longitude lost in our projected plot and how can we solve this? 
+
+
+
+### EX 4 ANSWER
+
 The solution to *that problem* is to shift the part of the raster that is over the dateline back to the west
 
+
+<details><summary>SOLUTION</summary>
+<p>
 ```{r example2-sst}
 sea_temp180 <- raster::rotate(sea_temp)
 plot(projectRaster(sea_temp180, rtemp))
 plot(aes_zone, add = TRUE)
 ```
+
+</p>
+</details>
+
 
 On the face of it this means we now have an easy job, simply project every sea surface temperature raster onto this polar map and then do the extraction. 
 
@@ -53,13 +68,15 @@ plot(aes_zone_ll, add =TRUE)
 
 ```
 
-But, it doesn't look good. This is because the polar region that crosses the dateline is a single polygon, but in this projection it must be split in two pieces. This is why there is two objects `aes_zone` and `aes_zone_ll`. It can be a bit of work to construct these two versions but in our experience it really made things simpler, there's simply a one-to-one relationship between the to data sets, one in longitude/latitude, and one in polar map coordinates. 
 
 ```{r native-grid2}
 plot(sea_temp180)
 plot(spTransform(aes_zone, raster::projection(sea_temp180)), add =TRUE)
 
 ```
+But, it doesn't look good. This is because the polar region that crosses the dateline is a single polygon, but in this projection it must be split in two pieces. This is why there is two objects `aes_zone` and `aes_zone_ll`. It can be a bit of work to construct these two versions but in our experience it really made things simpler, there's simply a one-to-one relationship between the to data sets, one in longitude/latitude, and one in polar map coordinates. 
+
+
 
 ## Build an index betweeen the raw raster data and the polar map regions
 

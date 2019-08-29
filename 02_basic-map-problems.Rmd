@@ -22,7 +22,7 @@ Projections are used to solve particular measurement problems. These include *di
 
 No projection is perfect for every situation, and quite often tools will work in *geographic coordinates*, or raw longitude latitude values using algorithms suited for angular units on a sphere or ellipsoid. 
 
-Most projection specification is made by choosing an *EPSG code*, and if one exists for your region then it's a good choice. However, sometimes the right EPSG does not exist and it's simpler to specify a custom projection. 
+Most projection specification is made by choosing an [*EPSG code*](https://epsg.io/), and if one exists for your region then it's a good choice. However, sometimes the right EPSG does not exist and it's simpler to specify a custom projection. 
 
 Each **+proj=** code is a *projection family*, there are many more than shown here. 
 
@@ -144,7 +144,10 @@ str(maps_c)
 
 
 
-Answer: 
+### EX 1 ANSWER
+
+<details><summary>SOLUTION</summary>
+<p>
 
 ```{r maps-extent-solution}
 range(maps_c$x, na.rm = TRUE)
@@ -152,6 +155,11 @@ range(maps_c$y, na.rm = TRUE)
 ## OR 
 maps_c$range
 ```
+
+</p>
+</details>
+
+
 
 ## Exercise 2
 
@@ -167,13 +175,22 @@ map(maps_c, fill = TRUE, col = "grey")
 ```
 
 
+### EX 2 ANSWER
 
-Answer: 
+<details><summary>SOLUTION</summary>
+<p>
 
+The actual data structure in the maps package is not suitable generally for subsetting polygons, or controlling
+polygon drawing. 
 
 ```{r maps-polygon-solution}
 maps::map(fill = TRUE, col = "grey")
 ```
+</p>
+</details>
+
+
+
 
 ## Polygon catastrophe
 
@@ -222,6 +239,25 @@ pts <- cbind(seq(-180, 175, by = 5),
 ```
 
 Hint: we need the coordinate reference system string **"+proj=laea +lat_0=-90 +datum=WGS84"** and a function to transform a matrix of longitude-latitude values. 
+
+
+### EX 3 ANSWER
+
+<details><summary>SOLUTION</summary>
+<p>
+
+```{r wrld-addplot-soln}
+plot(sp::spTransform(wrld_simpl, "+proj=laea +lat_0=-90 +datum=WGS84"))
+pts <- cbind(seq(-180, 175, by = 15), 
+             -72)
+ptsxy <- rgdal::project(pts, "+proj=laea +lat_0=-90 +datum=WGS84")
+points(ptsxy)
+```
+
+</p>
+</details>
+
+
 
 ## Let's use the maps data!
 
@@ -332,9 +368,115 @@ This video explains the Lambert Azimuthal Equal Area projection: https://www.you
 
 ## Demonstration of the projection concept
 
-rgl plots Stereographic, LAEA, Orthographic
+3D plots that show various projection concepts. 
+
+First prepared here: http://mdsumner.github.io/2016/01/26/Three_Projections.html
 
 
+```{r prepare3d, include = FALSE,eval=FALSE}
+library(maptools)
+library(rgl)
+library(rgdal)
+data(wrld_simpl)
+## raw coordinates from maptools
+ll <- coordinates(as(as(wrld_simpl, "SpatialLines"), "SpatialPoints"))
+## reduce the input map to the south
+maxlat <- -10
+llsub <- ll[,2] < maxlat
+## use the PROJ.4 sphere
+a <- 6370997
+## function to produce xyz from longitude, latitude, height
+## (spherical)
+llh2xyz <- function(lonlatheight, rad = 6370997, exag = 1) {
+  d2r <- pi / 180.0
+  cosLat = cos(lonlatheight[,2] * d2r)
+  sinLat = sin(lonlatheight[,2] * d2r)
+  cosLon = cos(lonlatheight[,1] * d2r)
+  sinLon = sin(lonlatheight[,1] * d2r)
+  x = rad * cosLat * sinLon
+  y = rad * cosLat * cosLon
+  z = (lonlatheight[,3] * exag) + rad * sinLat
+  cbind(x, y,-z)
+}
+xyz <- llh2xyz(cbind(ll, 0), rad = a)
+
+```
+
+```{r stereographic-3d, include = FALSE,eval=FALSE}
+family <- "stere"
+proj <- sprintf("+proj=%s +lon_0=0 +lat_0=-90 +ellps=sphere", family)
+jj <- 1
+pxy <- project(ll, proj)
+  
+  ## these are the projected map points on the plane
+  pxyz <- cbind(pxy, a)
+  
+  open3d()
+  ## plot 
+  bg3d(bg = "black")
+  plot3d(xyz, col = "dodgerblue", axes = FALSE)
+  points3d(pxyz[llsub, ], col = "#6AB787FF")
+  
+  ## rays from the projection point
+  ptz2 <- cbind(project(ll[llsub, ][sample(sum(llsub), 100), ], proj[jj]), a)
+ 
+ for (i in seq_len(nrow(ptz2))) {
+    origin <- switch(family[jj], 
+                    stere = cbind(0, 0, -a), 
+                    gnom = cbind(0, 0, 0), 
+                    ortho = cbind(ptz2[i, 1], ptz2[i, 2], 0))
+    lines3d(rbind(origin, ptz2[i,,drop = FALSE]), color = "grey", lwd =1)
+  }
+rglwidget()
+```
 
 
+```{r laea3d, include=FALSE,eval=FALSE}
+llh2xyz <- function(lonlatheight, rad = 6370997, exag = 1) {
+  d2r <- pi / 180.0
+  cosLat = cos(lonlatheight[,2] * d2r)
+  sinLat = sin(lonlatheight[,2] * d2r)
+  cosLon = cos(lonlatheight[,1] * d2r)
+  sinLon = sin(lonlatheight[,1] * d2r)
+  x = rad * cosLat * sinLon
+  y = rad * cosLat * cosLon
+  z = (lonlatheight[,3] * exag) + rad * sinLat
+  cbind(x, y,-z)
+}
+library(sp)
+library(rgl)
+data("wrld_simpl", package = "maptools")
+
+## raw coordinates from maptools
+ll <- coordinates(as(as(wrld_simpl, "SpatialLines"), "SpatialPoints"))
+
+
+a <- 6378137
+xyz <- llh2xyz(cbind(ll, 0), rad = a)
+laea <- "+proj=laea +lat_0=-90 +datum=WGS84"
+pxy <- reproj::reproj(ll, laea, source = 4326)[,1:2]
+## these are the projected map points on the plane
+pxyz <- cbind(pxy, a)
+
+
+clear3d()
+## plot 
+bg3d(bg = "white")
+plot3d(xyz, col = "dodgerblue", axes = FALSE)
+points3d(pxyz, col = "#6AB787FF")
+aspect3d("iso")
+for (i in sample(seq_len(nrow(xyz)), 50)) {
+  line <- cbind(ll[i, 1], seq(90,0, length.out = 36))
+  dxyz <- c(0, 0, a) - xyz[i, ]
+  line_xyz <- llh2xyz(cbind(line, 0), rad = sqrt(sum(dxyz^2)))
+  line_xyz[,3] <- line_xyz[,3] + a
+  
+  lines3d(line_xyz, alpha = 1, col = "white")
+  
+  lines3d(rbind(c(0, 0, a), xyz[i, ]), col = "yellow")
+  points3d(xyz[i, , drop = FALSE], size = 8, col = "firebrick")
+  
+}
+rglwidget()
+```
 

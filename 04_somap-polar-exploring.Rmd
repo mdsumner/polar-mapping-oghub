@@ -8,7 +8,10 @@ Please bear in mind that `SOmap` is still in development, and so its functionali
 
 ## Installation
 
-To run the code in this session, you can run the following. If this is problematic I suggest to just ignore it and follow the discussion. 
+Running code in this section is not required, we will discuss the use of SOmap. 
+
+
+To run the code in this session, you can run the following to install SOmap. 
 
 ```{r SOmap-install,eval=FALSE}
 remotes::install_github("AustralianAntarcticDivision/SOmap@dev-0.5")
@@ -17,17 +20,20 @@ remotes::install_github("AustralianAntarcticDivision/SOmap@dev-0.5")
 
 By default, `SOmap` works with base graphics (and associated functionality from packages such as `raster` and `sp`). It is also possible to work with `ggplot2`-based graphics, as described below.
 
-Start by loading the `SOmap` package:
+Start by loading the `SOmap` package and define some colours:
 
-```{r somap_init, cache = FALSE, eval=FALSE}
+```{r somap_init, cache = FALSE, eval=TRUE}
 library(SOmap)
+
+```
+
+```{r colors-dontuse, eval=FALSE, include=FALSE}
 ## also define a colour map to use for some examples
 my_cmap <- colorRampPalette(c("#4D4140", "#596F7E", "#168B98",
                               "#ED5B67", "#E27766", "#DAAD50", "#EAC3A6"))(51)
 ```
 
-```{r somap_pkgs, echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, eval=FALSE}
-## ensure these are loaded, library calls below are cached and might not get evaluated every run
+```{r somap_pkgs, include = FALSE}
 library(sp)
 library(raster)
 library(ggplot2)
@@ -38,13 +44,13 @@ library(ggplot2)
 
 A basic circumpolar map in polar stereographic projection:
 
-```{r somap1, eval=FALSE}
+```{r somap1, eval=TRUE}
 SOmap()
 ```
 
 `SOmanagement()` provides a number of contextual layers such as MPA boundaries and management zones.
 
-```{r somap2, eval=FALSE}
+```{r somap2, eval=TRUE}
 SOmap(trim = -40) ## plot to 40S
 ## add the exclusive economic zones management layer
 SOmanagement(eez = TRUE)
@@ -52,7 +58,7 @@ SOmanagement(eez = TRUE)
 
 ## Adding points
 
-```{r somap_pts1, eval=FALSE}
+```{r somap_pts1, eval=TRUE}
 ## some longitude/latitude data
 library(sp)
 my_points_ll <- data.frame(lon = seq(0, 350, by = 10), lat = -55, z = runif(36))
@@ -62,7 +68,7 @@ projection(my_points_ll) <- "+proj=longlat +datum=WGS84"
 
 This needs to be reprojected to match our map before plotting. The `SOproj` function does this:
 
-```{r somap_pts2, eval=FALSE}
+```{r somap_pts2, eval=TRUE}
 ## reproject to our SOmap projection
 my_points <- SOproj(my_points_ll)
 ## and plot
@@ -72,18 +78,18 @@ plot(my_points, col = "blue", add = TRUE)
 
 Or use `SOplot` to reproject and plot in one step:
 
-```{r somap_pts3, eval=FALSE}
+```{r somap_pts3, eval=TRUE}
 SOmap()
 SOplot(my_points_ll, col = "blue")
 ```
 
-## Exercise 1
+## Exercise 5
 
 Why does `SOplot()` not need to use the projection? How does it know to plot the data correctly onto an existing plot? 
 
-### ANSWER - Exercise 1
+### EX 5 ANSWER
 
-<details><summary>EX 1 SOLUTION</summary>
+<details><summary>EX 5 SOLUTION</summary>
 <p>
 
 The reason is that the `SOmap()` function *recorded the projection in use*. The functions to plot in SOmap are intended to be used in sequence, and by default we are adding map data or objects to an existing plot. The map projection in use is managed by these functions. 
@@ -91,3 +97,18 @@ The reason is that the `SOmap()` function *recorded the projection in use*. The 
 
 </p>
 </details>
+
+
+## Adding data layers
+
+`SOmap()` builds a reasonable map on its own, and we can add a variety of layers to that.
+
+```{r SOmap-add-data}
+SOmap(trim = -30)
+
+sst_local <- crop(rotate(sea_temp), extent(50, 180, -75, -30))
+SOplot(sst_local)
+
+sst_contours <- raster::rasterToContour(sst_local, levels = seq(0, 20, by = 2))
+SOplot(sst_contours, add = TRUE)
+```

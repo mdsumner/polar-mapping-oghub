@@ -10,6 +10,73 @@ What is required for mapping in polar regions?
 * conventions for global data -180/180, 0/360
 
 
+## Projections
+
+A brief overview here. For more please see the [geocompr book](https://geocompr.robinlovelace.net/reproj-geo-data.html). 
+
+Projections are used to solve particular measurement problems. These include *distance*, *area*, and *angle*. 
+
+* **Equal-area** - area is simple, we can calculate planar area anywhere
+* **Equi-distant** - less simple, applies along an axis or from one point only
+* **Conformal** - preserves *shape*, i.e. angles are sensible 
+
+No projection is perfect for every situation, and quite often tools will work in *geographic coordinates*, or raw longitude latitude values using algorithms suited for angular units on a sphere or ellipsoid. 
+
+Most projection specification is made by choosing an *EPSG code*, and if one exists for your region then it's a good choice. However, sometimes the right EPSG does not exist and it's simpler to specify a custom projection. 
+
+Each **+proj=** code is a *projection family*, there are many more than shown here. 
+
+Lambert Azimuthal Equal Area
+
+```
++proj=laea +lon_0=0 +lat_0=-90 +datum=WGS84
+```
+
+Polar Stereographic (south)
+
+```
++proj=stere +lon_0=0 +lat_0=-90 +lat_ts=-70 +datum=WGS84
+```
+
+Longitude-Latitude 
+
+```
++proj=longlat +datum=WGS84
+```
+
+Lambert Conformal Conic
+
+```
++proj=lcc +lon_0=147 +lat_0=-42 +lat_1=-50 +lat_2=-35 +datum=WGS84
+```
+
+Each of these has in common a **central longitude and latitude**, and many custom projections can be made using only these parameters. 
+
+Other parameters include
+
+
+* **+x_0**, **+y_0** - false easting (adds an arbitrary offset, usually to avoid negative coordinates)
+* **+lat_0**, **+lat_2** - these are for conic projections, the *secant* latitudes
+* **+ellps**, **+no_defs**, **+over** - various datum/ellipsoid specific
+* **+lat_ts** - latitude of true scale projection specific, e.g. Stereographic
+* **+zone**, **+south** - projection-specific parameters, e.g. for UTM
+
+
+Functions in R to expand EPSG parameters: 
+
+```{r epsg, eval=FALSE}
+epsg <- 3412   ## south pole stereographic 
+        # 3409 ## south polar equal area
+        # 3411 ## north polar stereographic (at 45W longitude, and Hughes 1980 ellipsoid)
+        # 3413 ## north polar stereographic (at 45W longitude, WGS84)
+prj <- sprintf("+init=epsg:%i", epsg)
+rgdal::CRSargs(sp::CRS(prj))
+
+## sf is easier
+sf::st_crs(epsg)
+```
+
+
 ## Mapping in R
 
 ```{r setup-02}
@@ -260,6 +327,8 @@ points(0, 0, cex = 40)
 
 
 This video explains the Lambert Azimuthal Equal Area projection: https://www.youtube.com/watch?v=quzIU4nL9ig  (crux at 2:25 with the spherical shells). 
+
+
 
 ## Demonstration of the projection concept
 

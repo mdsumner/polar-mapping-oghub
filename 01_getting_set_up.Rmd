@@ -12,11 +12,8 @@ req1 <- c("ggplot2", "maps", "maptools", "raster", "sp", "dplyr", "rgdal")
 remotes::install_cran(req1)
 ```
 
-If you have problems and can't get R set up as above, try this Binder badge - just click it and you should get a ready-to-go Rstudio session where the code already works. 
 
-[![Launch Rstudio Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mdsumner/polar-mapping-oghub/master?urlpath=rstudio)
-
-(It shouldn't take more than a few minutes to launch, but note that a session will only last for 12 hours or so). 
+## Data sets
 
 Obtain some extra data sets that will be used in this session. 
 
@@ -28,3 +25,21 @@ if (!file.exists("polar-mapping.Rdata")) {
 }
 load("polar-mapping.Rdata")
 ```
+
+
+## Alternative 1
+
+If you have problems and can't get R set up as above, try this Binder badge - just click it and you should get a ready-to-go Rstudio session where the code already works. 
+
+[![Launch Rstudio Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/mdsumner/polar-mapping-oghub/master?urlpath=rstudio)
+
+(It shouldn't take more than a few minutes to launch, but note that a session will only last for 12 hours or so and you will need to keep active with the session, it will time out after 10min or so). 
+
+## Alternative 2
+
+If you get really stuck, try https://rstudio.cloud/
+
+There you should be able to run the code above with no problem. 
+
+
+
